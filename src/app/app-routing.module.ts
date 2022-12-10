@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignupComponent, },
+  { path: 'dashboard', component: DashboardComponent, },
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
   ]
 })
 export class AppRoutingModule { }
