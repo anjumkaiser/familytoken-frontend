@@ -30,7 +30,7 @@ export class SignupComponent implements AfterViewInit {
       userLastName: new FormControl('', [Validators.required]),
       userName: new FormControl('', [Validators.required]),
       userAddress: new FormControl('', [Validators.required]),
-      userZipCode: new FormControl('', [Validators.required]),
+      userZipCode: new FormControl('', [Validators.required, Validators.pattern("[0-9]{5}"), Validators.maxLength(5)]),
       userEmail: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$") ]),
       userPassword: new FormControl('', [Validators.required]),
       userConfirmPassword: new FormControl('', [Validators.required]),
@@ -42,7 +42,7 @@ export class SignupComponent implements AfterViewInit {
       userTxHash: new FormControl(''),
       userDepositType: new FormControl(0),
       userDepositHashId: new FormControl(''),
-      userTotalBalance: new FormControl('', [Validators.required, Validators.pattern("[0-9]{7}")]),
+      userTotalBalance: new FormControl('', [Validators.required, Validators.pattern("[0-9]+")]),
       userDataIsValid: new FormControl(false, [Validators.required]),
       userDataInvalidReason: new FormControl('', [Validators.required]),
     },{
@@ -91,9 +91,25 @@ export class SignupComponent implements AfterViewInit {
     location.reload();
   }
 
+  errorDialogOkClicked(dlg: any) {
+    dlg.close();
+  }
+
 
   get f() {
     return this.signUpForm.controls;
+  }
+
+
+  keyPressNumbers(event: any) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
   }
 
   

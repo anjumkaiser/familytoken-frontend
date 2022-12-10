@@ -32,7 +32,7 @@
       </div>
 
       <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userZipCode')?.touched && !!signUpForm.get('userZipCode')?.invalid)}">
-        <input type="text" placeholder="Zip" formControlName="userZipCode">
+        <input type="text" placeholder="Zip" formControlName="userZipCode" maxlength="5" (keypress)="keyPressNumbers($event)">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
@@ -68,7 +68,7 @@
       </div>
 
       <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userNumberOfPackages')?.touched && !!signUpForm.get('userNumberOfPackages')?.invalid)}">
-        <input type="number" placeholder="Number of Packages" formControlName="userNumberOfPackages">
+        <input type="text" placeholder="Number of Packages" formControlName="userNumberOfPackages" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
         <!--div class="icon"><i class="fas fa-packs"></i></div-->
       </div>
       <!--div class="input_box">
@@ -77,6 +77,8 @@
       </div-->
       <div class="deposit-div">
         <span class="deposit-div-text">Did you pay 10 BUSD for maintenance</span>
+      </div>
+      <div class="deposit-div">
         <div class="deposit-div-toggle-button">
           <span>
             <a class="toggle-button-text-no">NO</a>
@@ -114,7 +116,7 @@
       </div>
 
       <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userTotalBalance')?.touched && !!signUpForm.get('userTotalBalance')?.invalid)}">
-        <input type="number" placeholder="Total Balance" formControlName="userTotalBalance">
+        <input type="text" placeholder="Total Balance" formControlName="userTotalBalance" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
       <!--div class="input_box">
@@ -187,6 +189,6 @@
   <div class="row">You need to retry.</div>
   <div class="row">&nbsp;</div>
   <div class="row">&nbsp;</div>
-  <div class="row text-center"><button class="btn btn-danger" (click)="successDialogOkClicked(successDialog)">Ok</button></div>
+  <div class="row text-center"><button class="btn btn-danger" (click)="errorDialogOkClicked(successDialog)">Ok</button></div>
   <div class="row">&nbsp;</div>
 </dialog>
