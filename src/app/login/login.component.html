@@ -1,0 +1,22 @@
+<div class="main_div">
+  <div class="title">Login</div>
+  <form action="#" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+    <div class="input_box" *ngIf="authError" style="text-align: center; color: red;">
+      User name / password mismatch
+    </div>
+    <div class="input_box">
+      <input type="text" placeholder="Username" formControlName="userName">
+      <div class="icon"><i class="fas fa-user"></i></div>
+    </div>
+    <div class="input_box">
+      <input type="text" placeholder="Password" formControlName="userPassword">
+      <div class="icon"><i class="fas fa-user"></i></div>
+    </div>
+    <div class="center">
+      <button class="btn btn-primary submit-button" type="submit" [disabled]="!loginForm.valid">LOG IN</button>
+    </div>
+    <div class="center">
+      <button class="btn btn-primary submit-button" routerLink="/signup">Proceed to Sign Up</button>
+    </div>
+  </form>
+</div>

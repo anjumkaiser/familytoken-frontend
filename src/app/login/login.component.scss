@@ -1,0 +1,213 @@
+body {
+  
+}
+
+.main_div{
+  width: 500px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.main_div .title{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.main_div .social_icons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.social_icons a{
+  display: block;
+  height: 45px;
+  width: 100%;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+
+.social_icons a span{
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+form {
+  margin: 0 auto;
+}
+
+form .input_box{
+  height: 50px;
+  width: 100%;
+  position: relative;
+  margin-top: 15px;
+}
+
+.input_box input, select{
+  height: 100%;
+  width: 400px;
+  outline: none;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  padding-left: 45px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+  background: #F0F0F0;
+}
+
+.input_box .icon{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: grey;
+}
+
+.button input {
+  width: 200px;
+  padding-left: 0;
+  background: #be2edd;
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+form .sign_up{
+  text-align: center;
+  margin-top: 25px;
+}
+
+.sign_up a{
+  color: #be2edd;
+}
+
+form a{
+  text-decoration: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.deposit-div {
+    height: 60px;
+}
+
+.deposit-div-text {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 29px;
+}
+
+.deposit-div-toggle-button {
+    top: 21px;
+    position: relative;
+    margin-left: 320px;
+}
+
+.toggle-button-text-no {
+  position: relative;
+  top: 8px;
+  right: 5px;
+}
+
+.toggle-button-text-yes {
+  position: relative;
+  top: 8px;
+  left: 5px;
+}
+
+.submit-button {
+  width: 150px;
+  height: 45px;
+  padding-left: 0;
+  background: #0000CC;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.center {
+  margin-top: 20px;
+  text-align: center;
+}
