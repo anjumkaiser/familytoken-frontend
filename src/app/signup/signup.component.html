@@ -58,12 +58,12 @@
         <div class="icon"><i class="fas fa-lock"></i></div>
       </div>
       <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userPhoneNumber')?.touched && !!signUpForm.get('userPhoneNumber')?.invalid)}">
-        <input type="tel" placeholder="Phone Number" formControlName="userPhoneNumber">
+        <input type="text" placeholder="Phone Number" formControlName="userPhoneNumber" (keypress)="keyPressNumbers($event)">
         <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
 
        <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userSponsorPhoneNumber')?.touched && !!signUpForm.get('userSponsorPhoneNumber')?.invalid)}">
-        <input type="tel" placeholder="Your Sponsor Phone Number" formControlName="userSponsorPhoneNumber">
+        <input type="tel" placeholder="Your Sponsor Phone Number" formControlName="userSponsorPhoneNumber" (keypress)="keyPressNumbers($event)">
         <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
 
