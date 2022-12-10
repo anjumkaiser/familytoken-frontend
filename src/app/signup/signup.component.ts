@@ -14,6 +14,7 @@ import { ConfirmedValidator } from '../validators/confirmed.validator';
 export class SignupComponent implements AfterViewInit {
 
   @ViewChild('successDialog') successDialog: any;
+  @ViewChild('errorDialog') errorDialog: any;
 
   countries: any[] = COUNTRIES;
 
@@ -69,10 +70,17 @@ export class SignupComponent implements AfterViewInit {
     const apiData = this.signUpForm.value;
     this.http.post(apiUrl, apiData).toPromise().then((x: any) => {
       console.log(x);
-      this.successDialog.nativeElement.showModal();
+      if (x.success) {
+        this.successDialog.nativeElement.showModal();
+        return;
+      }
+
+      this.errorDialog.nativeElement.showModal();
+
 
     }).catch((e: any) => {
       console.log(e);
+      this.errorDialog.nativeElement.showModal();
 
     });
   }

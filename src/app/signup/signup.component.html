@@ -101,19 +101,19 @@
         </div>
       </div-->
 
-      <div class="input_box" *ngIf="!!signUpForm.get('userDepositDone')?.value">
+      <div class="input_box" *ngIf="!!signUpForm.get('userDepositDone')?.value" [ngClass]="{'red-border' : (!!signUpForm.get('userDepositType')?.touched && !!signUpForm.get('userDepositType')?.invalid)}">
         <select formControlName="userDepositType">
           <option value=0>Google From</option>
           <option value=1>Tx Hash</option>
         </select>
       </div>
 
-      <div class="input_box" *ngIf="!!signUpForm.get('userDepositType')?.value">
-        <input type="number" placeholder="Total Balance" formControlName="userTxHash">
+      <div class="input_box" *ngIf="!!signUpForm.get('userDepositType')?.value" [ngClass]="{'red-border' : (!!signUpForm.get('userTxHash')?.touched && !!signUpForm.get('userTxHash')?.invalid)}">
+        <input type="number" placeholder="TxHash" formControlName="userTxHash">
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
 
-      <div class="input_box">
+      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userTotalBalance')?.touched && !!signUpForm.get('userTotalBalance')?.invalid)}">
         <input type="number" placeholder="Total Balance" formControlName="userTotalBalance">
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
@@ -136,13 +136,18 @@
       </div>
 
       <div class="input_box" *ngIf="!signUpForm.get('userDataIsValid')?.value">
-        <textarea claass="form-control" placeholder="Reason" formControlName="userDataInvalidReason"></textarea>
+        <textarea claass="form-control" placeholder="Reason" formControlName="userDataInvalidReason" [ngClass]="{'red-border' : (!!signUpForm.get('userDataInvalidReason')?.touched && !!signUpForm.get('userDataInvalidReason')?.invalid)}"></textarea>
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
 
-      <div class="center">
-        <!--input class="submit-button" type="submit" value="SIGN UP"-->
-        <button class="btn btn-primary submit-button" type="submit" [disabled]="!signUpForm.valid">SIGN UP</button>
+      <div *ngIf="!signUpForm.get('userDataIsValid')?.value">&nbsp;</div>
+      <div *ngIf="!signUpForm.get('userDataIsValid')?.value">&nbsp;</div>
+
+      <div class="input_box">
+        <div class="center">
+          <!--input class="submit-button" type="submit" value="SIGN UP"-->
+          <button class="btn btn-primary submit-button" type="submit" [disabled]="!signUpForm.valid">SIGN UP</button>
+        </div>
       </div>
       <!--div class="center">
         <button class="btn btn-primary submit-button" routerLink="/login">Proceed to Login</button>
@@ -167,5 +172,21 @@
   <div class="row">You have been successfully signed up.</div>
   <div class="row">&nbsp;</div>
   <div class="row text-center"><button class="btn btn-primary" (click)="successDialogOkClicked(successDialog)">Ok</button></div>
+  <div class="row">&nbsp;</div>
+</dialog>
+
+
+
+<dialog #errorDialog>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <h1>Sign up was unsuccessful</h1>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">You need to retry.</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><button class="btn btn-danger" (click)="successDialogOkClicked(successDialog)">Ok</button></div>
   <div class="row">&nbsp;</div>
 </dialog>
