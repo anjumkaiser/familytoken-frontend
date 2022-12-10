@@ -7,11 +7,13 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { AuthenticatedGuard } from './guards/authenticated.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignupComponent, },
-  { path: 'dashboard', component: DashboardComponent, },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
 ];
 
 @NgModule({
