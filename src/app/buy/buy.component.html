@@ -1,0 +1,57 @@
+<div>&nbsp;</div>
+    <div class="container" align="center">
+        <div class="card" style="width: 30rem">
+        <div>&nbsp;</div>
+        <div class="row">
+            <div class="col-7">
+                {{walletConnectedMessage}}
+            </div>
+            <div class="col-md-4 col-3">
+                <div>{{tokenBalance}} FamilyToken</div>
+                </div>
+        </div>
+        <div>&nbsp;</div>
+
+        <div class="text-center" >
+            <span>1 USD = {{tokenUnitPrice | currency:'':'':'0.0'}} FamilyToken</span>
+        </div>
+        <div>&nbsp;</div>
+
+        <div>
+            <div>Token Quantity</div>
+        </div>
+        <div>
+            <div class="input-group">
+                <input type="number" name="tokenAmount" class="form-control" [(ngModel)]="tokenQuantity" min=1 (change)="updatePriceFromToken()" (keyup)="updatePriceFromToken()" >
+                <span class="input-group-text" id="basic-addon2">FamilyToken</span>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+
+        <div>
+            <div>Amount</div>
+        </div>
+        <div>
+            <div class="input-group">
+                <input type="number" name="usdAmount" class="form-control" [(ngModel)]="usdAmount" [min]="minPurchaseAmountUsd" [max]="maxPurchaseAmountUsd" (change)="updatePrice()" (keyup)="updatePrice()" readonly>
+                <span class="input-group-text" id="basic-addon2">$ USD</span>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+
+
+        <!--div>Transaction Charges 1%</div-->
+        <div>Network Charges: US $ {{(ethMainnetTranFee) | currency:'':''}}</div>
+        <div>Estimated Purchase Amount: {{billedAmount - transctionCharges - ethMainnetTranFee | currency:'':'US $'}}</div>
+        <!--div class="disclaimer">Disclaimer:<br>The actual amount will be calculated after any payment gateway charges based on the actual amount received</div-->
+
+        <div>&nbsp;</div>
+
+        <div>
+            <div *ngIf="(tokenQuantity <= 0) || (usdAmount < minPurchaseAmountUsd) || (usdAmount > maxPurchaseAmountUsd)" class="dispense-error">ERROR: Family token quantity too low</div>
+            <!--app-paypal-buttons [hidden]="(tokenQuantity <= 0) || (usdAmount < minPurchaseAmountUsd)  || (usdAmount > maxPurchaseAmountUsd)" [router]="routerInstance" [walletAddress]="walletAddress" [tokenQuantity]="tokenQuantity" [billedAmount]="billedAmount" [billedCurrency]="billedCurrency" [approved]="paypalTransactionApproved" [declined]="paypalTransactionDeclined"></app-paypal-buttons-->
+        </div>
+    </div>
+</div>
+<div>&nbsp;</div>
+
