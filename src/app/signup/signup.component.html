@@ -1,5 +1,12 @@
-  <div class="main_div">
-    <div class="title">Sign up</div>
+<div class="container">
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><h1>Family Token</h1></div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-3 offset-3">
+  <div class="card" style="width: 40rem;">
+    <div class="row">&nbsp;</div>
+    <div class="text-center"><h3>Sign up</h3></div>
     <form action="#" [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
       <div class="input_box">
         <input type="text" placeholder="Full Name" id="IDuserFullNmae" formControlName="userFullName">
@@ -32,12 +39,12 @@
       </div>
       <div class="input_box">
         <input type="tel" placeholder="Phone Number" formControlName="userPhoneNumber">
-        <div class="icon"><i class="fas fa-user"></i></div>
+        <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
       <div class="input_box">
         <!--select class="form-control btn btn-dark text-center" name="country" id="country" required [(ngModel)]="model.country" #country="ngModel" (change)="updateCountry($event)"-->
         <!--select class="form-select btn btn-dark text-center" name="country" id="country" required-->
-        <select class="input_box" formControlName="userCountry">
+        <select formControlName="userCountry">
           <option value="" disabled selected>Select Country</option>
           <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
         </select>
@@ -46,11 +53,11 @@
       </div>
        <div class="input_box">
         <input type="tel" placeholder="Your Sponsor Phone Number" formControlName="userSponsorPhoneNumber">
-        <div class="icon"><i class="fas fa-user"></i></div>
+        <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
       <div class="input_box">
         <input type="number" placeholder="Number of Packages" formControlName="userNumberOfPackages">
-        <div class="icon"><i class="fas fa-user"></i></div>
+        <!--div class="icon"><i class="fas fa-packs"></i></div-->
       </div>
       <!--div class="input_box">
         <input type="text" placeholder="Did you deposit YES or NO" required>
@@ -71,7 +78,7 @@
       </div>
       <div class="input_box">
         <input type="number" placeholder="Total Balance" formControlName="userTotalBalance">
-        <div class="icon"><i class="fas fa-user"></i></div>
+        <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
       <!--div class="input_box">
         <input type="text" placeholder="Your old data is valid , YES or NO" required>
@@ -98,4 +105,9 @@
         <button class="btn btn-primary submit-button" routerLink="/login">Proceed to Login</button>
       </div>
     </form>
+    <div class="row">&nbsp;</div>
   </div>
+</div>
+</div>
+<div class="row">&nbsp;</div>
+</div>

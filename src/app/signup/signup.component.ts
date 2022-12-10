@@ -23,9 +23,9 @@ export class SignupComponent {
     userCountry: new FormControl('', Validators.required),
     userPhoneNumber: new FormControl('', Validators.required),
     userSponsorPhoneNumber: new FormControl('', Validators.required),
-    userNumberOfPackages: new FormControl(0, Validators.required),
+    userNumberOfPackages: new FormControl('', Validators.required),
     userDepositDone: new FormControl(false, Validators.required),
-    userTotalBalance: new FormControl(0, Validators.required),
+    userTotalBalance: new FormControl('', Validators.required),
     userDataIsValid: new FormControl(false, Validators.required),
   });
 
