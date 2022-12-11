@@ -21,6 +21,8 @@ export class SignupComponent implements AfterViewInit {
   //signUpForm = new FormGroup({});
   //userPurchasePackagesArray = new FormArray([]);
 
+  mailformat = {'0': {pattern: new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)} };
+
 
   userEmail: string = '';
   userName: string = '';
@@ -36,7 +38,7 @@ export class SignupComponent implements AfterViewInit {
   userPhoneNumber: string = '';
   userSponsorPhoneNumber: string = '';
   
-  userTotalBalance: number = 0;
+  userTotalBalance: string = '';
   userTxHash: string = '';
   userDepositType = 0;
   userDepositDone: boolean = false;
@@ -108,23 +110,23 @@ export class SignupComponent implements AfterViewInit {
   submitSignUpForm() {
     console.log('submitSignUpForm');
 
-    const apiUrl = '/api/auth/signup';
+    const apiUrl = '/api/auth/datacollection';
     let apiData = { 
-      userEmail: this.userEmail.trim(),
-      userName: this.userName.trim(),
+      //userEmail: this.userEmail.trim(),
+      //userName: this.userName.trim(),
       userFirstName: this.userFirstName.trim(),
       userLastName: this.userLastName.trim(),
       userAddress: this.userAddress.trim(),
       userZipCode: this.userZipCode.trim(),
       userCountry: this.userCountry.trim(),
 
-      userPassword: this.userPassword.trim(),
-      userConfirmPassword: this.userConfirmPassword.trim(),
+      //userPassword: this.userPassword.trim(),
+      //userConfirmPassword: this.userConfirmPassword.trim(),
 
       userPhoneNumber: this.userPhoneNumber.trim(),
       userSponsorPhoneNumber: this.userSponsorPhoneNumber.trim(),
 
-      userTotalBalance: this.userTotalBalance,
+      userTotalBalance: this.userTotalBalance.trim(),
       userTxHash: this.userTxHash.trim(),
       userDepositType: this.userDepositType,
       userDepositDone: this.userDepositDone,
@@ -210,10 +212,8 @@ export class SignupComponent implements AfterViewInit {
 
 
   addNewPackage(){
-    this.userPurchasePackagesArray.push( {
-      purchaseDate: '',
-      numberOfPackages: '',
-    });
+    const item =  { purchaseDate: '', numberOfPackages: ''};
+    this.userPurchasePackagesArray.push(item);
     console.log(this.userPurchasePackagesArray)
     //this.userPurchasePackagesArray.push(new FormControl('', Validators.required));
   }

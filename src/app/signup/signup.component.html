@@ -27,13 +27,11 @@
             </div>
           </div>
 
-          <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userName')?.touched && !!signUpForm.get('userName')?.invalid)}"-->
-          <div class="row">
+          <!--div class="row">
             <div class="col-10 offset-1">
               <input class="form-control" type="text" placeholder="Username" name="uName" id="uName" [(ngModel)]="userName" required >
             </div>
-            <!--div class="icon"><i class="fas fa-user"></i></div-->
-          </div>
+          </div-->
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userAddress')?.touched && !!signUpForm.get('userAddress')?.invalid)}"-->
           <div class="row">
@@ -61,34 +59,29 @@
             </div>
           </div>
 
-          <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userEmail')?.touched && !!signUpForm.get('userEmail')?.invalid)}"-->
-          <div class="row">
+          <!--div class="row">
             <div class="col-10 offset-1">
-              <input class="form-control" type="text" mask="A*@A" placeholder="Email" name="uEmail" id="uEmail" [(ngModel)]="userEmail" required >
+              <input class="form-control" type="text" mask="" [patterns]="mailformat" placeholder="Email" name="uEmail" id="uEmail" [(ngModel)]="userEmail" required >
             </div>
-            <!--div class="icon"><i class="fas fa-envelope"></i></div-->
           </div>
 
-          <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userPassword')?.touched && !!signUpForm.get('userPassword')?.invalid)}"-->
           <div class="row">
             <div class="col-10 offset-1">
               <input class="form-control" type="password" placeholder="Password" name="uPassword" id="uPassword" [(ngModel)]="userPassword" required>
             </div>
-            <!--div class="icon"><i class="fas fa-lock"></i></div-->
           </div>
 
-          <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userConfirmPassword')?.touched && !!signUpForm.get('userConfirmPassword')?.invalid)}"-->
           <div class="row">
             <div class="col-10 offset-1">
               <input class="form-control" type="password" placeholder="Confirm Password" name="uConfirmPassword" id="uConfirmPassword" [(ngModel)]="userConfirmPassword" required>
             </div>
-            <!--div class="icon"><i class="fas fa-lock"></i></div-->
           </div>
+          -->
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userPhoneNumber')?.touched && !!signUpForm.get('userPhoneNumber')?.invalid)}" -->
           <div class="row">
             <div class="col-10 offset-1">
-              <input class="form-control" type="text" placeholder="Phone Number" name="uPhoneNumber" id="uPhoneNumber"[(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
+              <input class="form-control" type="text" mask='9{14}' placeholder="Phone Number" name="uPhoneNumber" id="uPhoneNumber"[(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
             </div>
             <!--div class="icon"><i class="fas fa-phone"></i></div-->
           </div>
