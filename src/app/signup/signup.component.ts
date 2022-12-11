@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+//import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { COUNTRIES } from '../models/countries';
@@ -18,13 +18,42 @@ export class SignupComponent implements AfterViewInit {
 
   countries: any[] = COUNTRIES;
 
-  signUpForm = new FormGroup({});
+  //signUpForm = new FormGroup({});
+  //userPurchasePackagesArray = new FormArray([]);
+
+
+  userEmail: string = '';
+  userName: string = '';
+  userFirstName: string = '';
+  userLastName: string = '';
+  userAddress: string = '';
+  userZipCode: string = '';
+  userCountry: string = '';
+  
+  userPassword: string = ''
+  userConfirmPassword: string = '';
+  
+  userPhoneNumber: string = '';
+  userSponsorPhoneNumber: string = '';
+  
+  userTotalBalance: number = 0;
+  userTxHash: string = '';
+  userDepositType = 0;
+  userDepositDone: boolean = false;
+  userDataIsValid: boolean = false;
+
+  userPurchasePackagesArray: any[] = [];
 
 
   constructor(
     private http: HttpClient,
-    private fb: FormBuilder,
   ) {
+
+    /*
+    this.userPurchasePackagesArray = new FormArray([
+      new FormControl('', [Validators.required, Validators.pattern("[0-31].[1-12].[0-9]{4}")]),
+    ]);
+
     this.signUpForm = fb.group({
       userFirstName: new FormControl('', [Validators.required]),
       userLastName: new FormControl('', [Validators.required]),
@@ -37,17 +66,21 @@ export class SignupComponent implements AfterViewInit {
       userCountry: new FormControl('', [Validators.required]),
       userPhoneNumber: new FormControl('', [Validators.required, Validators.pattern("^00[0-9]{12}")]),
       userSponsorPhoneNumber: new FormControl('', [Validators.required]),
-      userNumberOfPackages: new FormControl('', [Validators.required]),
+      //userNumberOfPackages: new FormControl('', [Validators.required]),
       userDepositDone: new FormControl(false, [Validators.required]),
       userTxHash: new FormControl(''),
       userDepositType: new FormControl(0),
       userDepositHashId: new FormControl(''),
       userTotalBalance: new FormControl('', [Validators.required, Validators.pattern("[0-9]+")]),
       userDataIsValid: new FormControl(false, [Validators.required]),
-      userDataInvalidReason: new FormControl('', [Validators.required]),
+      userDataInvalidReason: new FormControl(''),
+      //userPurchasePackages: new FormControl('', [Validators.required, Validators.pattern("[0-31].[1-12].[0-9]{4}")]),
+      //userPurchasePackages: new FormControl('', [Validators.required, Validators.pattern("[0-31].[1-12].[0-9]{4}")]),
+      userPurchasePackagesArray: this.userPurchasePackagesArray,
     },{
       validator: ConfirmedValidator('userPassword', 'userConfirmPassword'),
     })
+    */
 
   }
 
@@ -62,12 +95,42 @@ export class SignupComponent implements AfterViewInit {
   }
   */
 
+  submitDisabled = true;
+
+  checkDisabled() {
+    let res = false;
+
+    return res;
+  }
+
 
   submitSignUpForm() {
     console.log('submitSignUpForm');
 
     const apiUrl = '/api/auth/signup';
-    const apiData = this.signUpForm.value;
+    let apiData = { 
+      userEmail: this.userEmail.trim(),
+      userName: this.userName.trim(),
+      userFirstName: this.userFirstName.trim(),
+      userLastName: this.userLastName.trim(),
+      userAddress: this.userAddress.trim(),
+      userZipCode: this.userZipCode.trim(),
+      userCountry: this.userCountry.trim(),
+
+      userPassword: this.userPassword.trim(),
+      userConfirmPassword: this.userConfirmPassword.trim(),
+
+      userPhoneNumber: this.userPhoneNumber.trim(),
+      userSponsorPhoneNumber: this.userSponsorPhoneNumber.trim(),
+
+      userTotalBalance: this.userTotalBalance,
+      userTxHash: this.userTxHash.trim(),
+      userDepositType: this.userDepositType,
+      userDepositDone: this.userDepositDone,
+      userDataIsValid: this.userDataIsValid,
+      userPurchasePackagesArray: this.userPurchasePackagesArray,
+
+    };
     this.http.post(apiUrl, apiData).toPromise().then((x: any) => {
       console.log(x);
       if (x.success) {
@@ -96,9 +159,41 @@ export class SignupComponent implements AfterViewInit {
   }
 
 
-  get f() {
-    return this.signUpForm.controls;
+
+  regexCheckEmailAddress(input: any) {
+    const re = new RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
+    let output = re.test(input);
+    console.log(output);
+    //return output;
   }
+
+
+  keyPressEmail(event: any) {
+    console.log(event.target.value);
+
+    return this.regexCheckEmailAddress(event.target.value);
+  }
+
+
+  regexCheckDate(input: any): boolean {
+    //const re = new RegExp("/^[1-31].[1-12].[0-9]{4}$/");
+    const re = /[1-31].[1-12].[0-9]{4}/;
+    console.log(input)
+    let output = re.test(input);
+    console.log(output);
+    return output;
+  }
+
+
+  keyPressDate(event: any) {
+    console.log(event.target.value);
+    if (this.regexCheckDate(event.target.value) ) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+  
 
 
   keyPressNumbers(event: any) {
@@ -110,6 +205,16 @@ export class SignupComponent implements AfterViewInit {
     } else {
       return true;
     }
+  }
+
+
+  addNewPackage(){
+    this.userPurchasePackagesArray.push( {
+      purchaseDate: '',
+      numberOfPackages: '',
+    });
+    console.log(this.userPurchasePackagesArray)
+    //this.userPurchasePackagesArray.push(new FormControl('', Validators.required));
   }
 
   

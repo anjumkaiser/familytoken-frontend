@@ -8,69 +8,93 @@
   <div class="card" style="width: 40rem;">
     <div class="row">&nbsp;</div>
     <div class="text-center"><h3>Sign up</h3></div>
-    <form action="#" [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
+    <!--form action="#" [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()"-->
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userFirstName')?.touched && !!signUpForm.get('userFirstName')?.invalid)}">
-        <input type="text" placeholder="First Name" formControlName="userFirstName">
+      <div class="input_box"> <!--[ngClass]="{'red-border' : (!!signUpForm.get('userFirstName')?.touched && !!signUpForm.get('userFirstName')?.invalid)}"-->
+        <input type="text" placeholder="First Name" [(ngModel)]="userFirstName">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
-
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userLastName')?.touched && !!signUpForm.get('userLastName')?.invalid)}">
-        <input type="text" placeholder="Last Name" formControlName="userLastName">
+      <div class="input_box"> <!--[ngClass]="{'red-border' : (!!signUpForm.get('userLastName')?.touched && !!signUpForm.get('userLastName')?.invalid)}"-->
+        <input type="text" placeholder="Last Name" [(ngModel)]="userLastName">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userName')?.touched && !!signUpForm.get('userName')?.invalid)}">
-        <input type="text" placeholder="Username" formControlName="userName">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userName')?.touched && !!signUpForm.get('userName')?.invalid)}"-->
+        <input type="text" placeholder="Username" [(ngModel)]="userName">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userAddress')?.touched && !!signUpForm.get('userAddress')?.invalid)}">
-        <input type="text" placeholder="Enter your full address" formControlName="userAddress">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userAddress')?.touched && !!signUpForm.get('userAddress')?.invalid)}"-->
+        <input type="text" placeholder="Enter your full address" [(ngModel)]="userAddress">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userZipCode')?.touched && !!signUpForm.get('userZipCode')?.invalid)}">
-        <input type="text" placeholder="Zip" formControlName="userZipCode" maxlength="5" (keypress)="keyPressNumbers($event)">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userZipCode')?.touched && !!signUpForm.get('userZipCode')?.invalid)}"-->
+        <input type="text" placeholder="Zip" [(ngModel)]="userZipCode" maxlength="5" (keypress)="keyPressNumbers($event)">
         <div class="icon"><i class="fas fa-user"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userCountry')?.touched && !!signUpForm.get('userCountry')?.invalid)}">
-        <select formControlName="userCountry">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userCountry')?.touched && !!signUpForm.get('userCountry')?.invalid)}"-->
+        <select [(ngModel)]="userCountry" required>
           <option value="" disabled selected>Select Country</option>
           <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
         </select>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userEmail')?.touched && !!signUpForm.get('userEmail')?.invalid)}">
-        <input type="text" placeholder="Email" formControlName="userEmail">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userEmail')?.touched && !!signUpForm.get('userEmail')?.invalid)}"-->
+        <input type="text" placeholder="Email" [(ngModel)]="userEmail" required (keypress)="keyPressEmail($event)">
         <div class="icon"><i class="fas fa-envelope"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userPassword')?.touched && !!signUpForm.get('userPassword')?.invalid)}">
-        <input type="password" placeholder="Password" formControlName="userPassword">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userPassword')?.touched && !!signUpForm.get('userPassword')?.invalid)}"-->
+        <input type="password" placeholder="Password" [(ngModel)]="userPassword" required>
         <div class="icon"><i class="fas fa-lock"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userConfirmPassword')?.touched && !!signUpForm.get('userConfirmPassword')?.invalid)}">
-        <input type="password" placeholder="Confirm Password" formControlName="userConfirmPassword">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userConfirmPassword')?.touched && !!signUpForm.get('userConfirmPassword')?.invalid)}"-->
+        <input type="password" placeholder="Confirm Password" [(ngModel)]="userConfirmPassword" required>
         <div class="icon"><i class="fas fa-lock"></i></div>
       </div>
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userPhoneNumber')?.touched && !!signUpForm.get('userPhoneNumber')?.invalid)}">
-        <input type="text" placeholder="Phone Number" formControlName="userPhoneNumber" (keypress)="keyPressNumbers($event)">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userPhoneNumber')?.touched && !!signUpForm.get('userPhoneNumber')?.invalid)}" -->
+        <input type="text" placeholder="Phone Number" [(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
         <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
 
-       <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userSponsorPhoneNumber')?.touched && !!signUpForm.get('userSponsorPhoneNumber')?.invalid)}">
-        <input type="tel" placeholder="Your Sponsor Phone Number" formControlName="userSponsorPhoneNumber" (keypress)="keyPressNumbers($event)">
+       <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userSponsorPhoneNumber')?.touched && !!signUpForm.get('userSponsorPhoneNumber')?.invalid)}"-->
+        <input type="tel" placeholder="Your Sponsor Phone Number" [(ngModel)]="userSponsorPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength="14">
         <div class="icon"><i class="fas fa-phone"></i></div>
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userNumberOfPackages')?.touched && !!signUpForm.get('userNumberOfPackages')?.invalid)}">
+      <!--div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userNumberOfPackages')?.touched && !!signUpForm.get('userNumberOfPackages')?.invalid)}">
         <input type="text" placeholder="Number of Packages" formControlName="userNumberOfPackages" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
-        <!--div class="icon"><i class="fas fa-packs"></i></div-->
+      </div-->
+
+
+      <div class="input_box">Packages <button class="btn" (click)="addNewPackage()">+</button></div>
+      
+      <div *ngFor="let pack of userPurchasePackagesArray">
+        <div class="input_box">
+          <input type="text" pattern="[A-Za-z]{3}" placeholder="DD.MM.YYYY" [(ngModel)]="pack.purchaseDate">
+        </div>
+        <div class="input_box">
+          <input type="text" placeholder="Number of Packages" (keypress)="keyPressNumbers($event)" minlength=1 maxlength=5 [(ngModel)]="pack.numberOfPackages">
+        </div>
+        <hr>
       </div>
+
+
+      <!--div *ngFor="let pack in signUpForm.get('userPurchasePackagesArray')['controls']; index as idx">
+        <div class="input_box">
+          <input type="text" placeholder="DD.MM.YYYY" [(ngModel)]="idx">
+        </div>
+        < !--div class="input_box">
+          <input type="text" placeholder="Number of Packages" (keypress)="keyPressNumbers($event)" minlength=1 maxlength=5 [ngModel]="pack.numberOfPackages">
+        </div-- >
+        <hr>
+      </div-->
+
+
       <!--div class="input_box">
         <input type="text" placeholder="Did you deposit YES or NO" required>
         <div class="icon"><i class="fas fa-user"></i></div>
@@ -83,7 +107,7 @@
           <span>
             <a class="toggle-button-text-no">NO</a>
           <label class="switch">
-            <input type="checkbox" formControlName="userDepositDone">
+            <input type="checkbox" [(ngModel)]="userDepositDone">
             <span class="slider round"></span>
           </label>
            <a class="toggle-button-text-yes">YES</a>
@@ -103,20 +127,20 @@
         </div>
       </div-->
 
-      <div class="input_box" *ngIf="!!signUpForm.get('userDepositDone')?.value" [ngClass]="{'red-border' : (!!signUpForm.get('userDepositType')?.touched && !!signUpForm.get('userDepositType')?.invalid)}">
-        <select formControlName="userDepositType">
+      <div class="input_box"> <!-- *ngIf="!!signUpForm.get('userDepositDone')?.value" [ngClass]="{'red-border' : (!!userDepositType')?.touched && !!signUpForm.get('userDepositType')?.invalid)}" -->
+        <select [(ngModel)]="userDepositType">
           <option value=0>Google From</option>
           <option value=1>Tx Hash</option>
         </select>
       </div>
 
-      <div class="input_box" *ngIf="!!signUpForm.get('userDepositType')?.value" [ngClass]="{'red-border' : (!!signUpForm.get('userTxHash')?.touched && !!signUpForm.get('userTxHash')?.invalid)}">
-        <input type="number" placeholder="TxHash" formControlName="userTxHash">
+      <div class="input_box" *ngIf="!!userDepositType"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userTxHash')?.touched && !!signUpForm.get('userTxHash')?.invalid)}"-->
+        <input type="text" placeholder="TxHash" [(ngModel)]="userTxHash">
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
 
-      <div class="input_box" [ngClass]="{'red-border' : (!!signUpForm.get('userTotalBalance')?.touched && !!signUpForm.get('userTotalBalance')?.invalid)}">
-        <input type="text" placeholder="Total Balance" formControlName="userTotalBalance" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
+      <div class="input_box"> <!-- [ngClass]="{'red-border' : (!!signUpForm.get('userTotalBalance')?.touched && !!signUpForm.get('userTotalBalance')?.invalid)}"-->
+        <input type="text" placeholder="Total Balance" [(ngModel)]="userTotalBalance" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
       <!--div class="input_box">
@@ -129,7 +153,7 @@
           <span>
             <a class="toggle-button-text-no">NO</a>
           <label class="switch">
-            <input type="checkbox" formControlName="userDataIsValid">
+            <input type="checkbox" [(ngModel)]="userDataIsValid">
             <span class="slider round"></span>
           </label>
            <a class="toggle-button-text-yes">YES</a>
@@ -137,24 +161,26 @@
         </div>
       </div>
 
-      <div class="input_box" *ngIf="!signUpForm.get('userDataIsValid')?.value">
-        <textarea claass="form-control" placeholder="Reason" formControlName="userDataInvalidReason" [ngClass]="{'red-border' : (!!signUpForm.get('userDataInvalidReason')?.touched && !!signUpForm.get('userDataInvalidReason')?.invalid)}"></textarea>
+      <div class="input_box" *ngIf="!userDataIsValid">
+        <textarea claass="form-control" placeholder="Reason"></textarea> <!--[(ngModel)]="userDataInvalidReason" [ngClass]="{'red-border' : (!!signUpForm.get('userDataInvalidReason')?.touched && !!signUpForm.get('userDataInvalidReason')?.invalid)}"-->
         <!--div class="icon"><i class="fas fa-bill"></i></div-->
       </div>
 
-      <div *ngIf="!signUpForm.get('userDataIsValid')?.value">&nbsp;</div>
-      <div *ngIf="!signUpForm.get('userDataIsValid')?.value">&nbsp;</div>
+      <div *ngIf="!userDataIsValid">&nbsp;</div>
+      <div *ngIf="!userDataIsValid">&nbsp;</div>
 
       <div class="input_box">
         <div class="center">
           <!--input class="submit-button" type="submit" value="SIGN UP"-->
-          <button class="btn btn-primary submit-button" type="submit" [disabled]="!signUpForm.valid">SIGN UP</button>
+          <button class="btn btn-primary submit-button" type="submit" (click)="submitSignUpForm()" 
+            [disabled]="!userEmail || !userFirstName || !userLastName || !userPassword  || !userConfirmPassword || !userAddress|| !userZipCode || !userCountry"
+            >SIGN UP</button> <!-- [disabled]="!signUpForm.valid" -->
         </div>
       </div>
       <!--div class="center">
         <button class="btn btn-primary submit-button" routerLink="/login">Proceed to Login</button>
       </div-->
-    </form>
+    <!--/form-->
     <div class="row">&nbsp;</div>
   </div>
 </div>
@@ -189,6 +215,6 @@
   <div class="row">You need to retry.</div>
   <div class="row">&nbsp;</div>
   <div class="row">&nbsp;</div>
-  <div class="row text-center"><button class="btn btn-danger" (click)="errorDialogOkClicked(successDialog)">Ok</button></div>
+  <div class="row text-center"><button class="btn btn-danger" (click)="errorDialogOkClicked(errorDialog)">Ok</button></div>
   <div class="row">&nbsp;</div>
 </dialog>
