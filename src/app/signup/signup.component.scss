@@ -1,3 +1,4 @@
+/*
 body {
   
 }
@@ -223,3 +224,14 @@ textarea {
   border-radius: 25px;
 }
 
+
+
+.ng-valid[required], .ng-valid.required  {
+  border: 5px solid #42A948; // green
+}
+
+.ng-invalid:not(form)  {
+  border: 5px solid #a94442; // red
+}
+
+*/

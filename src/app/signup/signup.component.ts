@@ -41,6 +41,7 @@ export class SignupComponent implements AfterViewInit {
   userDepositType = 0;
   userDepositDone: boolean = false;
   userDataIsValid: boolean = false;
+  userDataInvalidReason: string = '';
 
   userPurchasePackagesArray: any[] = [];
 
@@ -215,6 +216,10 @@ export class SignupComponent implements AfterViewInit {
     });
     console.log(this.userPurchasePackagesArray)
     //this.userPurchasePackagesArray.push(new FormControl('', Validators.required));
+  }
+
+  removePackage(idx: number){
+    this.userPurchasePackagesArray.splice(idx, 1);
   }
 
   

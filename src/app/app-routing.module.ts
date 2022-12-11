@@ -4,6 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
+
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -25,6 +31,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxMaskModule.forRoot(maskConfig),
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
