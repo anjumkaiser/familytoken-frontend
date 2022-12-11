@@ -112,7 +112,7 @@ export class SignupComponent implements AfterViewInit {
 
     const apiUrl = '/api/auth/datacollection';
     let apiData = { 
-      //userEmail: this.userEmail.trim(),
+      userEmail: this.userEmail.trim(),
       //userName: this.userName.trim(),
       userFirstName: this.userFirstName.trim(),
       userLastName: this.userLastName.trim(),
