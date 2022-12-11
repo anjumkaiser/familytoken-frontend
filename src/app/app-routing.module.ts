@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 const maskConfig: Partial<IConfig> = {
-  validation: false,
+  validation: true,
 };
 
 
@@ -18,11 +18,12 @@ import { BuyComponent } from './buy/buy.component';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, },
+  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  //{ path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignupComponent, },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
-  { path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard] },
+  //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
+  //{ path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard] },
 ];
 
 @NgModule({
