@@ -29,57 +29,75 @@
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userName')?.touched && !!signUpForm.get('userName')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="text" placeholder="Username" name="uName" id="uName" [(ngModel)]="userName" required >
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Username" name="uName" id="uName" [(ngModel)]="userName" required >
+            </div>
             <!--div class="icon"><i class="fas fa-user"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userAddress')?.touched && !!signUpForm.get('userAddress')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="text" placeholder="Enter your full address" name="uAddress" id="uAddress" [(ngModel)]="userAddress" required>
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Enter your full address" name="uAddress" id="uAddress" [(ngModel)]="userAddress" required>
+            </div>
             <!--div class="icon"><i class="fas fa-user"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userZipCode')?.touched && !!signUpForm.get('userZipCode')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="text" placeholder="Zip" name="uZipCode" id="uZipCode" [(ngModel)]="userZipCode" required maxlength="5" (keypress)="keyPressNumbers($event)">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" mask="99999" placeholder="Zip" name="uZipCode" id="uZipCode" [(ngModel)]="userZipCode" required>
+            </div>
             <!--div class="icon"><i class="fas fa-user"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userCountry')?.touched && !!signUpForm.get('userCountry')?.invalid)}"-->
           <div class="row">
-            <select class="form-select"  name="uCountry" id="uCountry" [(ngModel)]="userCountry" required>
-              <option value="" disabled selected>Select Country</option>
-              <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
-            </select>
+            <div class="col-10 offset-1">
+              <select class="form-select"  name="uCountry" id="uCountry" [(ngModel)]="userCountry" required>
+                <option value="" disabled selected>Select Country</option>
+                <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+              </select>
+            </div>
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userEmail')?.touched && !!signUpForm.get('userEmail')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="text" placeholder="Email" name="uEmail" id="uEmail" [(ngModel)]="userEmail" required (keypress)="keyPressEmail($event)">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" mask="A*@A" placeholder="Email" name="uEmail" id="uEmail" [(ngModel)]="userEmail" required >
+            </div>
             <!--div class="icon"><i class="fas fa-envelope"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userPassword')?.touched && !!signUpForm.get('userPassword')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="password" placeholder="Password" name="uPassword" id="uPassword" [(ngModel)]="userPassword" required>
+            <div class="col-10 offset-1">
+              <input class="form-control" type="password" placeholder="Password" name="uPassword" id="uPassword" [(ngModel)]="userPassword" required>
+            </div>
             <!--div class="icon"><i class="fas fa-lock"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userConfirmPassword')?.touched && !!signUpForm.get('userConfirmPassword')?.invalid)}"-->
           <div class="row">
-            <input class="form-control" type="password" placeholder="Confirm Password" name="uConfirmPassword" id="uConfirmPassword" [(ngModel)]="userConfirmPassword" required>
+            <div class="col-10 offset-1">
+              <input class="form-control" type="password" placeholder="Confirm Password" name="uConfirmPassword" id="uConfirmPassword" [(ngModel)]="userConfirmPassword" required>
+            </div>
             <!--div class="icon"><i class="fas fa-lock"></i></div-->
           </div>
 
           <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userPhoneNumber')?.touched && !!signUpForm.get('userPhoneNumber')?.invalid)}" -->
           <div class="row">
-            <input class="form-control" type="text" placeholder="Phone Number" name="uPhoneNumber" id="uPhoneNumber"[(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Phone Number" name="uPhoneNumber" id="uPhoneNumber"[(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
+            </div>
             <!--div class="icon"><i class="fas fa-phone"></i></div-->
           </div>
 
            <!--div class="input_box"> [ngClass]="{'red-border' : (!!signUpForm.get('userSponsorPhoneNumber')?.touched && !!signUpForm.get('userSponsorPhoneNumber')?.invalid)}"-->
            <div class="row">
-            <input  class="form-control" type="tel" placeholder="Your Sponsor Phone Number" name="uSponsorPhoneNumber" id="uSponsorPhoneNumber" [(ngModel)]="userSponsorPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength="14">
+            <div class="col-10 offset-1">
+              <input  class="form-control" type="tel" placeholder="Your Sponsor Phone Number" name="uSponsorPhoneNumber" id="uSponsorPhoneNumber" [(ngModel)]="userSponsorPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength="14">
+            </div>
             <!--div class="icon"><i class="fas fa-phone"></i></div-->
           </div>
 
@@ -89,19 +107,19 @@
 
 
           <div class="row">
-            <div class="col-6">Packages</div>
-            <div class="col-6 text-end"><div class="btn" (click)="addNewPackage()">+</div></div>
+            <div class="col-5 offset-1">Packages</div>
+            <div class="col-5 text-end"><div class="btn" (click)="addNewPackage()">+</div></div>
           </div>
           
           <div *ngFor="let pack of userPurchasePackagesArray; let idx = index">
             <div class="row">
-              <div class="col-6">
+              <div class="col-4 offset-1">
                 <input class="form-control" type="text" mask="d0.M0.0000" [leadZeroDateTime]="true"  placeholder="DD.MM.YYYY" name="pPruchaseDate" id="pPurchaseDate" [(ngModel)]="pack.purchaseDate">
               </div>
               <div class="col-5">
                 <input class="form-control" type="text" placeholder="Number of Packages" (keypress)="keyPressNumbers($event)" minlength=1 maxlength=5 name="pNumberOfPackages" id="pNumberOfPackages" [(ngModel)]="pack.numberOfPackages">
               </div>
-              <div class="col-1">
+              <div class="col-1 text-end">
                 <div class="btn" (click)="removePackage(idx)">-</div>
               </div>
             </div>
@@ -123,11 +141,11 @@
             <input type="text" placeholder="Did you deposit YES or NO" required>
             <div class="icon"><i class="fas fa-user"></i></div>
           </div-->
-          <div class="deposit-div">
-            <span class="deposit-div-text">Did you pay 10 BUSD for maintenance</span>
+          <div class="row">
+            <div class="col-10 offset-1">Did you pay 10 BUSD for maintenance</div>
           </div>
-          <div class="deposit-div">
-            <div class="deposit-div-toggle-button">
+          <div class="row">
+            <div class="col-3 offset-8">
               <span>
                 <a class="toggle-button-text-no">NO</a>
               <label class="switch">
@@ -152,43 +170,53 @@
           </div-->
 
           <div class="row">
-            <select class="form-select" name="uDepositType" id="uDepositType" [(ngModel)]="userDepositType">
-              <option value=0>Google From</option>
-              <option value=1>Tx Hash</option>
-            </select>
+            <div class="col-10 offset-1">
+              <select class="form-select" name="uDepositType" id="uDepositType" [(ngModel)]="userDepositType">
+                <option value=0>Google From</option>
+                <option value=1>Tx Hash</option>
+              </select>
+            </div>
           </div>
 
           <div class="row" *ngIf="!!userDepositType">
-            <input class="form-control" type="text" placeholder="TxHash" name="uTxHash" id="uTxHash" [(ngModel)]="userTxHash">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="TxHash" name="uTxHash" id="uTxHash" [(ngModel)]="userTxHash">
+            </div>
           </div>
 
           <div class="row">
-            <input class="form-control" type="text" placeholder="Total Balance" name="uTotalBalance" id="uTotalBalance" [(ngModel)]="userTotalBalance" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Total Balance" name="uTotalBalance" id="uTotalBalance" [(ngModel)]="userTotalBalance" (keypress)="keyPressNumbers($event)" minlength="1" maxlength="7">
+            </div>
           </div>
       
           <div class="row">
-            <div class="col-6">Your old data is valid</div>
-            <div class="col-6">
-              <div>
+            <div class="col-10 offset-1">Your old data is valid</div>
+          </div>
+          <div class="row">
+            <div class="col-3 offset-8">
+              <span>
                 <a class="toggle-button-text-no">NO</a>
                 <label class="switch">
                   <input class="form-control" type="checkbox" name="uDataIsValid" id="userDataIsValid" [(ngModel)]="userDataIsValid">
                   <span class="slider round"></span>
                 </label>
                 <a class="toggle-button-text-yes">YES</a>
-              </div>
+              </span>
             </div>
           </div>
 
           <div class="row" *ngIf="!userDataIsValid">
-            <textarea class="form-control" placeholder="Reason" name="uDataInvalidReason" id="uDataInvalidReason" [(ngModel)]="userDataInvalidReason"></textarea>
+            <div class="col-10 offset-1">
+              <textarea class="form-control" placeholder="Reason" name="uDataInvalidReason" id="uDataInvalidReason" [(ngModel)]="userDataInvalidReason"></textarea>
+            </div>
           </div>
 
           <div *ngIf="!userDataIsValid">&nbsp;</div>
           <div *ngIf="!userDataIsValid">&nbsp;</div>
 
           <div class="row">
-            <div class="center">
+            <div class="col-10 offset-1 text-center">
               <button class="btn btn-primary submit-button" type="submit" [disabled]="!signUpForm.form.valid">SIGN UP</button>
             </div>
           </div>
