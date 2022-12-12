@@ -114,6 +114,7 @@ export const COUNTRIES: any[] = [
     { code3: "JEY", name: "Jersey"},
     { code3: "JOR", name: "Jordan"},
     { code3: "KAZ", name: "Kazakhstan"},
+    { code3: "XKX", name: "Kosovo (the Republic of)"},
     { code3: "KEN", name: "Kenya"},
     { code3: "KIR", name: "Kiribati"},
     { code3: "PRK", name: "Korea (the Democratic People's Republic of)"},
