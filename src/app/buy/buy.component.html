@@ -46,10 +46,14 @@
         <!--div class="disclaimer">Disclaimer:<br>The actual amount will be calculated after any payment gateway charges based on the actual amount received</div-->
 
         <div>&nbsp;</div>
+        <div>{{(tokenQuantity <= 0)}} || {{(usdAmount < minPurchaseAmountUsd)}} || {{(usdAmount > maxPurchaseAmountUsd)}}</div>
+        <div>{{tokenQuantity}} || {{billedAmount}}  || {{billedCurrency}} || {{walletAddress}}</div>
+        <div>&nbsp;</div>
 
         <div>
             <div *ngIf="(tokenQuantity <= 0) || (usdAmount < minPurchaseAmountUsd) || (usdAmount > maxPurchaseAmountUsd)" class="dispense-error">ERROR: Family token quantity too low</div>
-            <!--app-paypal-buttons [hidden]="(tokenQuantity <= 0) || (usdAmount < minPurchaseAmountUsd)  || (usdAmount > maxPurchaseAmountUsd)" [router]="routerInstance" [walletAddress]="walletAddress" [tokenQuantity]="tokenQuantity" [billedAmount]="billedAmount" [billedCurrency]="billedCurrency" [approved]="paypalTransactionApproved" [declined]="paypalTransactionDeclined"></app-paypal-buttons-->
+            <app-paypal-buttons [hidden]="(tokenQuantity <= 0) || (usdAmount < minPurchaseAmountUsd)  || (usdAmount > maxPurchaseAmountUsd)" [router]="routerInstance" [walletAddress]="walletAddress" [tokenQuantity]="tokenQuantity" [billedAmount]="billedAmount" [billedCurrency]="billedCurrency" [approved]="paypalTransactionApproved" [declined]="paypalTransactionDeclined"></app-paypal-buttons>
+
         </div>
     </div>
 </div>

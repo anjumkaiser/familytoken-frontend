@@ -5,10 +5,6 @@ import { timer, of, fromEvent } from 'rxjs';
 
 import { ethers, providers } from "ethers";
 
-declare var paypal: any;
-
-//const priceUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd';
-
 
 @Component({
   selector: 'app-buy',
@@ -48,11 +44,29 @@ export class BuyComponent implements OnInit, AfterViewInit {
 
   usdAmount: number = 0;
 
+  provider: any;
+  signer: any;
+
   private timerSource: any;
   private scrollEventsReference: any;
+  routerInstance: Router;
+
+  constructor(
+    private router: Router,
+  ) {
+    this.routerInstance = this.router;
+  }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+    this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
+    await this.provider.send("eth_requestAccounts", []);
+    this.signer = this.provider.getSigner();
+    this.walletAddress = await this.signer.getAddress();
+    } catch (e: any) {
+
+    }
   }
 
 
@@ -68,6 +82,7 @@ export class BuyComponent implements OnInit, AfterViewInit {
     this.billedAmount = (this.tokenQuantity * this.tokenUnitPrice) + this.paypalFee + this.ethMainnetTranFee;
     this.transctionCharges = 2 / 100 * this.billedAmount;
     this.billedAmount += this.transctionCharges;
+    this.billedAmount = Math.round(this.billedAmount);
   }
 
 
@@ -89,5 +104,11 @@ export class BuyComponent implements OnInit, AfterViewInit {
     */
   }
 
+  paypalTransactionApproved(response: any, routerInstance: any) {
+  }
+
+
+  paypalTransactionDeclined(response: any, routerInstance: any) {
+  }
 
 }

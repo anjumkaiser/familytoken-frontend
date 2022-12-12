@@ -47,6 +47,9 @@ export class PaypalButtonsComponent implements OnInit {
 
     let instance = this;
 
+    console.log(instance.billedCurrency);
+    console.log(instance.billedAmount);
+
     FUNDING_SOURCES.forEach(function(fundingSource) {
       paypal
         .Buttons({
@@ -55,7 +58,7 @@ export class PaypalButtonsComponent implements OnInit {
             return actions.order.create({
               purchase_units: [
               {
-                description: 'Nexum Token',
+                description: 'Family Token',
                 amount: {
                   currency_code: instance.billedCurrency,
                   value: instance.billedAmount,
@@ -67,8 +70,10 @@ export class PaypalButtonsComponent implements OnInit {
             const order = await actions.order.capture();
             console.log(order);
 
+            const apiData = {order: order, walletAddress: instance.walletAddress,  tokenQuantity: instance.tokenQuantity, billedAmount: instance.billedAmount, billedCurrency: instance.billedCurrency};
             const apiUrl: string = '/api/processPaypalTokenPurchase';
-            instance.http.post(apiUrl, {order: order, walletAddress: instance.walletAddress,  tokenQuantity: instance.tokenQuantity, billedAmount: instance.billedAmount, billedCurrency: instance.billedCurrency}).toPromise()
+            console.log(apiUrl, apiData);
+            instance.http.post(apiUrl, apiData).toPromise()
               .then( (d: any) => {
                 instance.approved?.(d, instance.router);
               })

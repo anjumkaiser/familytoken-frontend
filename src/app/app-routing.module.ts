@@ -14,16 +14,18 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyComponent } from './buy/buy.component';
+import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.component';``
 
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'signup', pathMatch: 'full' },
-  //{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  //{ path: 'login', component: LoginComponent, },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignupComponent, },
   //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
   //{ path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard] },
+  { path: 'dashboard', component: DashboardComponent, },
+  { path: 'buy', component: BuyComponent, },
 ];
 
 @NgModule({
@@ -41,6 +43,7 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     BuyComponent,
+    PaypalButtonsComponent,
   ]
 })
 export class AppRoutingModule { }
