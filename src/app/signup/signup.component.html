@@ -108,7 +108,7 @@
           <div *ngFor="let pack of userPurchasePackagesArray; let idx = index">
             <div class="row">
               <div class="col-4 offset-1">
-                <input class="form-control" type="text" mask="d0.M0.0000" [leadZeroDateTime]="true"  placeholder="DD.MM.YYYY" name="pPruchaseDate" id="pPurchaseDate" [(ngModel)]="pack.purchaseDate">
+                <input class="form-control" type="text" mask="d0.M0.0000" [leadZeroDateTime]="true"  [dropSpecialCharacters]=false placeholder="DD.MM.YYYY" name="pPruchaseDate" id="pPurchaseDate" [(ngModel)]="pack.purchaseDate">
               </div>
               <div class="col-5">
                 <input class="form-control" type="text" placeholder="Number of Packages" (keypress)="keyPressNumbers($event)" minlength=1 maxlength=5 name="pNumberOfPackages" id="pNumberOfPackages" [(ngModel)]="pack.numberOfPackages">
