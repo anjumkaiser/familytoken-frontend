@@ -64,6 +64,7 @@ export class BuyComponent implements OnInit, AfterViewInit {
     await this.provider.send("eth_requestAccounts", []);
     this.signer = this.provider.getSigner();
     this.walletAddress = await this.signer.getAddress();
+    this.walletConnectedMessage = 'WALLET CONNECTED';
     } catch (e: any) {
 
     }
