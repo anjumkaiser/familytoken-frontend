@@ -23,8 +23,11 @@ export class BuyComponent implements OnInit, AfterViewInit {
   walletAddress: string = '';
   tokenBalance: string = '0';
 
-  tokenQuantity: number = 1;
-  tokenUnitPrice: number = 85;
+  minTokenQuantity: number = 24;
+  maxTokenQuantity: number = 2000;
+
+  tokenQuantity: number = 24;
+  tokenUnitPrice: number = 1;
 
   billedAmount: number = 0;
   billedCurrency: string = 'USD';
