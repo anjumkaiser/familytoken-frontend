@@ -120,6 +120,16 @@ export class DashboardComponent implements OnInit {
 
   autostakingPoolButtonClicked() {
 
+    this.http.post('/api/processAutoStaking', { Amount : this.autoStakingDialogBalance}).toPromise().then((res: any) => {
+
+        if (res.success) {
+          this.autoStakingDialogBalance -= this.autoStakingDialogBalance;
+        }
+
+      }).catch( (e: any) => {
+        console.log(e);
+      });
+
   }
 
 
