@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { utils, providers, Contract } from "ethers";
 
@@ -41,14 +42,26 @@ export class DashboardComponent implements OnInit {
   signer: any;
   walletAddress: string = '';
 
-  userStanding: number = 0;
+  userStanding: number = 400;
 
   withdrawalDisabled: boolean = false;
 
   withdrawalDialogMaximumWithdrawalAmount: number = 0;
   withdrawalDialogWithdrawalAmount: number = 0;
 
+
+  referralDialogMaximumReferralAmount: number = 0;
+
+  generatedReferralCode: string = '';
+
   @ViewChild('withdrawalDialog') withdrawalDialog: any;
+  @ViewChild('referralDialog') referralDialog: any;
+
+
+  constructor (
+    private http: HttpClient,
+  ) { }
+
 
   async ngOnInit() {
     try {
@@ -60,6 +73,8 @@ export class DashboardComponent implements OnInit {
     } catch (e: any) {
 
     }
+    this.withdrawalDialogMaximumWithdrawalAmount = this.userStanding / 4;
+    this.referralDialogMaximumReferralAmount = this.userStanding / 4;
   }
 
 
@@ -79,6 +94,7 @@ export class DashboardComponent implements OnInit {
 
 
   referralPoolButtonClicked() {
+    this.referralDialog.nativeElement.showModal();
 
   }
 
@@ -90,6 +106,24 @@ export class DashboardComponent implements OnInit {
 
   familyNftPoolButtonClicked() {
 
+  }
+
+
+  generateReferralCodeButtonClicked() {
+    if ( this.referralDialogMaximumReferralAmount > 24) {
+
+      this.http.get('/api/generateReferralCode').toPromise().then((res: any) => {
+
+        if (res.success) {
+          this.referralDialogMaximumReferralAmount -= 24;
+          this.generatedReferralCode = res.referralCode;
+        }
+
+      }).catch( (e: any) => {
+        console.log(e);
+      });
+
+    }
   }
 
 }

@@ -20,6 +20,9 @@
                 <button class="btn btn-outline-secondary blockbox" (click)="withdrawalPoolButtonClicked()" [disabled]="withdrawalDisabled">
                     <div>Withdraw</div>
                     <div *ngIf="withdrawalDisabled">(Disabled)</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
+                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
                 </button>
             </div>
         </div>
@@ -28,7 +31,12 @@
             <div>Pool 2</div>
             <div>&nbsp;</div>
             <div>
-                <button class="btn btn-outline-secondary blockbox" (click)="referralPoolButtonClicked()">Referral</button>
+                <button class="btn btn-outline-secondary blockbox" (click)="referralPoolButtonClicked()">
+                    <div>Referral</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
+                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                </button>
             </div>
         </div>
 
@@ -36,7 +44,12 @@
             <div>Pool 3</div>
             <div>&nbsp;</div>
             <div>
-                <button class="btn btn-outline-secondary blockbox" (click)="autostakingPoolButtonClicked()">AutoStaking</button>
+                <button class="btn btn-outline-secondary blockbox" (click)="autostakingPoolButtonClicked()">
+                    <div>AutoStaking</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
+                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                </button>
             </div>
         </div>
 
@@ -44,7 +57,12 @@
             <div>Pool 4</div>
             <div>&nbsp;</div>
             <div>
-                <button class="btn btn-outline-secondary blockbox" (click)="familyNftPoolButtonClicked()">Family NFT</button>
+                <button class="btn btn-outline-secondary blockbox" (click)="familyNftPoolButtonClicked()">
+                    <div>Family NFT</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
+                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                </button>
             </div>
         </div>
     </div>
@@ -95,3 +113,55 @@
     </div>
 
 </dialog>
+
+
+
+<dialog #referralDialog class="referralDialog">
+
+    <div class="container">
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row text-center">
+            <h2>Referral</h2>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">Balance Available</div>
+            <div class="col-6">{{referralDialogMaximumReferralAmount}}</div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-10 offset-1 text-center">
+                <button class="btn btn-primary" [disabled]="referralDialogMaximumReferralAmount < 24" (click)="generateReferralCodeButtonClicked()">Generate Referral Code $24</button>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row" *ngIf="!!generatedReferralCode">
+            <div class="col-10 offset-1 text-center">
+                Referral Code : {{generatedReferralCode}}
+            </div>
+        </div>
+
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn btn-secondary" (click)="closeDialog(referralDialog)">Close</button>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+    </div>
+
+</dialog>
+
+
