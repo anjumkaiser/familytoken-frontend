@@ -52,6 +52,10 @@ export class DashboardComponent implements OnInit {
 
   referralDialogMaximumReferralAmount: number = 0;
 
+  autoStakingDialogBalance: number = 0;
+
+
+
   generatedReferralCode: string = '';
 
   @ViewChild('withdrawalDialog') withdrawalDialog: any;
@@ -73,8 +77,18 @@ export class DashboardComponent implements OnInit {
     } catch (e: any) {
 
     }
-    this.withdrawalDialogMaximumWithdrawalAmount = this.userStanding / 4;
-    this.referralDialogMaximumReferralAmount = this.userStanding / 4;
+
+    this.http.get('/api/getUserStanding').toPromise().then( (res: any) => {
+      console.log(res);
+      this.withdrawalDialogMaximumWithdrawalAmount = res.pool1;
+      this.referralDialogMaximumReferralAmount = res.pool2;
+      this.autoStakingDialogBalance = res.autostaking;
+    }).catch((e: any) => {
+      console.log(e);
+    });
+
+    //this.withdrawalDialogMaximumWithdrawalAmount = this.userStanding / 4;
+    // /this.referralDialogMaximumReferralAmount = this.userStanding / 4;
   }
 
 
@@ -84,11 +98,16 @@ export class DashboardComponent implements OnInit {
 
 
   withdrawalDialogOkButtonClicked() {
+    this.http.post('/api/processWithdrawal', {Amount: this.withdrawalDialogWithdrawalAmount}).toPromise().then ((res: any) => {
+      this.withdrawalDialogMaximumWithdrawalAmount -= this.withdrawalDialogWithdrawalAmount;
+    }).catch((ex: any) => {
 
+    });
   }
 
 
   withdrawalPoolButtonClicked() {
+    this.withdrawalDialogWithdrawalAmount = 0;
     this.withdrawalDialog.nativeElement.showModal();
   }
 

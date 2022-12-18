@@ -34,8 +34,8 @@
                 <button class="btn btn-outline-secondary blockbox" (click)="referralPoolButtonClicked()">
                     <div>Referral</div>
                     <div>&nbsp;</div>
-                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
-                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                    <div>Balance {{referralDialogMaximumReferralAmount}} FT</div>
+                    <div>Balance US$ {{referralDialogMaximumReferralAmount}}</div>
                 </button>
             </div>
         </div>
@@ -47,8 +47,8 @@
                 <button class="btn btn-outline-secondary blockbox" (click)="autostakingPoolButtonClicked()">
                     <div>AutoStaking</div>
                     <div>&nbsp;</div>
-                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
-                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                    <div>Balance {{autoStakingDialogBalance}} FT</div>
+                    <div>Balance US$ {{autoStakingDialogBalance}}</div>
                 </button>
             </div>
         </div>
@@ -104,7 +104,7 @@
             <div class="col-12 text-center">
                 <button class="btn btn-secondary" (click)="closeDialog(withdrawalDialog)">Close</button>
                 &nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" (click)="withdrawalDialogOkButtonClicked()">Withdraw</button>
+                <button class="btn btn-primary" (click)="withdrawalDialogOkButtonClicked(); closeDialog(withdrawalDialog)" [disabled]=" withdrawalDialogWithdrawalAmount <=0 || withdrawalDialogWithdrawalAmount > withdrawalDialogMaximumWithdrawalAmount">Withdraw</button>
             </div>
         </div>
 
