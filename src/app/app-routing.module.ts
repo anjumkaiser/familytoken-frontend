@@ -10,6 +10,8 @@ const maskConfig: Partial<IConfig> = {
 };
 
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { LandingComponent } from './landing/landing.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,8 +20,10 @@ import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.componen
 
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
+
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent, },
   { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignupComponent, },
   //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
@@ -44,6 +48,7 @@ const routes: Routes = [
     DashboardComponent,
     BuyComponent,
     PaypalButtonsComponent,
+    LandingComponent,
   ]
 })
 export class AppRoutingModule { }

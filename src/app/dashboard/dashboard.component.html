@@ -2,9 +2,9 @@
 
     <div clas="row">&nbsp;</div>
 
-    <div clas="row">
+    <!--div clas="row">
         <img src='/assets/image/familytoken.png'>
-    </div>
+    </div-->
 
     <div clas="row">&nbsp;</div>
     <div clas="row">&nbsp;</div>
@@ -12,12 +12,86 @@
     <div clas="row">&nbsp;</div>
     <div clas="row">&nbsp;</div>
 
-    <div class="row">
-        <div class="col-1 offset-1">
-            <button class="btn btn-primary" routerLink="/buy">Buy</button>
+    <div class="row text-center">
+        <div class="col-2 offset-2">
+            <div>Pool 1</div>
+            <div>&nbsp;</div>
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="withdrawalPoolButtonClicked()" [disabled]="withdrawalDisabled">
+                    <div>Withdraw</div>
+                    <div *ngIf="withdrawalDisabled">(Disabled)</div>
+                </button>
+            </div>
         </div>
-        <div class="col-1">
-            <button class="btn btn-secondary" routerLink="/withdraw">Withdraw</button>
+
+        <div class="col-2">
+            <div>Pool 2</div>
+            <div>&nbsp;</div>
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="referralPoolButtonClicked()">Referral</button>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div>Pool 3</div>
+            <div>&nbsp;</div>
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="autostakingPoolButtonClicked()">AutoStaking</button>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div>Pool 4</div>
+            <div>&nbsp;</div>
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="familyNftPoolButtonClicked()">Family NFT</button>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+<dialog #withdrawalDialog class="withdrawalDialog">
+    
+    <div class="container">
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row text-center">
+            <h2>Withdrawal</h2>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">Total Available</div>
+            <div class="col-6">{{withdrawalDialogMaximumWithdrawalAmount}}</div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">
+                <label>Withdrawal Amount</label>
+            </div>
+            <div class="col-5">
+                <input class="form-control" type="number" [(ngModel)]="withdrawalDialogWithdrawalAmount" min=0 [max]="withdrawalDialogMaximumWithdrawalAmount">
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn btn-secondary" (click)="closeDialog(withdrawalDialog)">Close</button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="withdrawalDialogOkButtonClicked()">Withdraw</button>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+    </div>
+
+</dialog>
