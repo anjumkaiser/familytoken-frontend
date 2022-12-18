@@ -1,9 +1,13 @@
 .paypal-container {
-	width: 50%;
+	width: 90%;
 }
 
 @media screen and (max-width: 375px) {
 	.paypal-container {
-		width: 50%;
+		width: 90%;
 	}
+}
+
+.input-group-fixed-width {
+	width: 100px;
 }
