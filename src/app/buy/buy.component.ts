@@ -3,7 +3,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { timer, of, fromEvent } from 'rxjs';
 
-import { ethers, providers } from "ethers";
+import { ethers, providers, Contract } from "ethers";
+
+declare var ethereum: any;
+
+
+const bep20abi = [
+  // Read-Only Functions
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function balanceOf(address owner) view returns (uint256 balance)",
+  "function decimals() view returns (uint8)",
+
+  // Authenticated Functions
+  "function transfer(address to, uint amount) returns (bool success)",
+
+  // Events
+  "event Transfer(address indexed from, address indexed to, uint amount)"
+];
+
+const bep20FamilyTokenContractAddress = '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867';
 
 
 @Component({
@@ -19,9 +38,8 @@ export class BuyComponent implements OnInit, AfterViewInit {
   agreeCheckValue: boolean = false;
   agreementAccepted: boolean = false;
 
-  connected: boolean = false;
   walletAddress: string = '';
-  tokenBalance: string = '0';
+  tokenBalance: string = '0'
 
   minTokenQuantity: number = 24;
   maxTokenQuantity: number = 2000;
@@ -63,13 +81,42 @@ export class BuyComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     try {
-    this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
-    await this.provider.send("eth_requestAccounts", []);
-    this.signer = this.provider.getSigner();
-    this.walletAddress = await this.signer.getAddress();
-    this.walletConnectedMessage = 'WALLET CONNECTED';
-    } catch (e: any) {
+      this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
+      await this.provider.send("eth_requestAccounts", []);
+      this.signer = this.provider.getSigner();
+      this.walletAddress = await this.signer.getAddress();
+      this.walletConnected = true;
+      this.walletConnectedMessage = 'WALLET CONNECTED';
 
+      console.log(this.walletAddress.split('0x')[1]);
+
+      const bep20FamilyToken = new ethers.Contract(bep20FamilyTokenContractAddress, bep20abi, this.provider);
+      const bep20FamilyTokenDecimals = await bep20FamilyToken['decimals']();
+      const bep20FamilyTokenBalance = await bep20FamilyToken['balanceOf'](this.walletAddress.split('0x')[1]);
+      const bep20FamilyTokenBalanceConverted = await ethers.utils.formatUnits(bep20FamilyTokenBalance, bep20FamilyTokenDecimals);
+      this.tokenBalance = bep20FamilyTokenBalanceConverted;
+      console.log(this.tokenBalance);
+
+      if (this.tokenBalance === '0.0') {
+        const wasAdded = await ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: bep20FamilyTokenContractAddress, // The address that the token is at.
+              symbol: 'FT', // A ticker symbol or shorthand, up to 5 chars.
+              decimals: bep20FamilyTokenDecimals, // The number of decimals in the token
+              //image: tokenImage, // A string url of the token logo
+            },
+          },
+        })
+
+        if(wasAdded) {
+          console.log('succesfully added');
+        }
+      }
+    } catch (e: any) {
+      console.log(e);
     }
   }
 

@@ -56,7 +56,7 @@
             <div *ngIf="(tokenQuantity < minTokenQuantity) || (usdAmount < minPurchaseAmountUsd) || (usdAmount > maxPurchaseAmountUsd)" class="dispense-error">ERROR: Family token quantity minimum is {{minTokenQuantity}} and maximum is {{maxTokenQuantity}}</div>
 
         </div>
-        <div *ngIf="!!walletAddress">
+        <div *ngIf="walletConnected">
             <app-paypal-buttons class="paypal-container" [hidden]="(tokenQuantity < minTokenQuantity || tokenQuantity > maxTokenQuantity) || (usdAmount < minPurchaseAmountUsd)  || (usdAmount > maxPurchaseAmountUsd)" [router]="routerInstance" [walletAddress]="walletAddress" [tokenQuantity]="tokenQuantity" [billedAmount]="billedAmount" [billedCurrency]="billedCurrency" [approved]="paypalTransactionApproved" [declined]="paypalTransactionDeclined"></app-paypal-buttons>
         </div>
         <div>&nbsp;</div>
