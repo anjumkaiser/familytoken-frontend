@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   familyTokenBalance: string = '0.0';
   maxFamilyNFT: number = 0;
   familyNFTPurchaseQuantity: number = 0;
+  familyNftPurchasePrice: number = 24;
 
   withdrawalDisabled: boolean = false;
 
@@ -65,7 +66,7 @@ export class DashboardComponent implements OnInit {
       const bep20FamilyTokenBalance = await this.bep20FamilyTokenContract['balanceOf'](this.walletAddress.split('0x')[1]);
       const bep20FamilyTokenBalanceConverted = await utils.formatUnits(bep20FamilyTokenBalance, this.bep20FamilyTokenDecimals);
       this.familyTokenBalance = bep20FamilyTokenBalanceConverted;
-      this.maxFamilyNFT = Math.floor(Number(this.familyTokenBalance)/24);
+      this.maxFamilyNFT = Math.floor(Number(this.familyTokenBalance)/this.familyNftPurchasePrice);
       console.log(this.maxFamilyNFT, this.familyTokenBalance);
     } catch (e: any) {
 
@@ -103,7 +104,7 @@ export class DashboardComponent implements OnInit {
   async purchaseDialogOkButtonClicked() {
     try {
       console.log(this.bep20FamilyTokenDecimals);
-      const qty = utils.parseUnits('1', this.bep20FamilyTokenDecimals);
+      const qty = utils.parseUnits((this.familyNFTPurchaseQuantity * this.familyNftPurchasePrice).toString(), this.bep20FamilyTokenDecimals);
       console.log(qty);
       let txnResult = await this.bep20FamilyTokenContract.transfer(familyTokenWalletAddress, qty);
       console.log(txnResult);
