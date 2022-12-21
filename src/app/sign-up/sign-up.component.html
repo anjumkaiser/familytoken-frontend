@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><h1>Family Token</h1></div>
+  <!--div class="row text-center"><h2>New Website Migration Form</h2></div-->
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="card" >
+        <div class="row">&nbsp;</div>
+        <div class="text-center"><h3>Sign up</h3></div>
+
+        <form (ngSubmit)="submitSignUpForm()" #signUpForm="ngForm">
+
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="First Name" name="uFirstName" id="uFirstName" [(ngModel)]="userFirstName" #name="ngModel" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Last Name" name="uLastName" id="uLastName" [(ngModel)]="userLastName" required >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" placeholder="Email" name="uEmail" id="uEmail" [(ngModel)]="userEmail" required >
+            </div>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="password" placeholder="Password" name="uPassword" id="uPassword" [(ngModel)]="userPassword" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="password" placeholder="Confirm Password" name="uConfirmPassword" id="uConfirmPassword" [(ngModel)]="userConfirmPassword" required>
+            </div>
+          </div>
+          
+
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input class="form-control" type="text" mask='9{14}' placeholder="Phone Number" name="uPhoneNumber" id="uPhoneNumber"[(ngModel)]="userPhoneNumber" (keypress)="keyPressNumbers($event)" maxlength=14 required>
+            </div>
+          </div>
+
+           <div class="row">
+            <div class="col-10 offset-1">
+              <input  class="form-control" type="text" placeholder="Referral Code" name="uReferralCode" id="uReferralCode" [(ngModel)]="userReferralCode" (keypress)="keyPressNumbers($event)" maxlength="14">
+            </div>
+          </div>
+
+                    
+          <div class="row">&nbsp;</div>
+
+          <div class="row">
+            <div class="col-10 offset-1 text-center">
+              <button class="btn btn-primary submit-button" type="submit" [disabled]="!signUpForm.form.valid">SIGN UP</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="btn btn-outline-secondary" routerLink='/login'>Proceed to Login</a>
+            </div>
+          </div>
+          
+        </form>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-10 offset-1 text-center">
+                
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+</div>
+
+
+<dialog #successDialog>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <h1>Sign up successful</h1>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">You have been successfully signed up.</div>
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><button class="btn btn-primary" (click)="successDialogOkClicked(successDialog)">Ok</button></div>
+  <div class="row">&nbsp;</div>
+</dialog>
+
+
+<dialog #errorDialog>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <h1>Sign up was unsuccessful</h1>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">You need to retry.</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><button class="btn btn-danger" (click)="errorDialogOkClicked(errorDialog)">Ok</button></div>
+  <div class="row">&nbsp;</div>
+</dialog>

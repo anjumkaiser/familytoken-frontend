@@ -13,6 +13,7 @@ const maskConfig: Partial<IConfig> = {
 import { NavbarComponent } from './navbar/navbar.component';
 import { LandingComponent } from './landing/landing.component';
 import { DataCollectionComponent } from './data-collection/data-collection.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyComponent } from './buy/buy.component';
@@ -25,8 +26,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent, },
   { path: 'login', component: LoginComponent, },
-  //{ path: 'signup', component: SignupComponent, },
-  { path: 'signup', redirectTo: 'datacollection', pathMatch: 'full' },
+  { path: 'signup', component: SignUpComponent, },
   { path: 'datacollection', component: DataCollectionComponent, },
   //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
   //{ path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard] },
@@ -46,6 +46,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     DataCollectionComponent,
+    SignUpComponent,
     LoginComponent,
     DashboardComponent,
     BuyComponent,
