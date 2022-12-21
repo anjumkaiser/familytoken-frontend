@@ -16,6 +16,7 @@
         <div class="col-2 offset-2">
             <div>Pool 1</div>
             <div>&nbsp;</div>
+            <!--
             <div>
                 <button class="btn btn-outline-secondary blockbox" (click)="withdrawalPoolButtonClicked()" [disabled]="withdrawalDisabled">
                     <div>Withdraw</div>
@@ -23,6 +24,16 @@
                     <div>&nbsp;</div>
                     <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
                     <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                </button>
+            </div>
+            -->
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="purchasePoolButtonClicked()">
+                    <div>Purchased</div>
+                    <div *ngIf="withdrawalDisabled">(Disabled)</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{familyTokenBalance}} FT</div>
+                    <!--div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div-->
                 </button>
             </div>
         </div>
@@ -68,6 +79,45 @@
     </div>
 </div>
 
+
+<dialog #purchaseDialog class="purchaseDialog">
+
+    <div class="container">
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row text-center">
+            <h2>Purchase Family NFT</h2>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">Family Token Balance</div>
+            <div class="col-6">{{familyTokenBalance}}</div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-5 offset-1">Family NFT</div>
+            <div class="col-6"><input class="form-control" type="number" min=0 [max]="maxFamilyNFT" [(ngModel)]="familyNFTPurchaseQuantity"></div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn btn-secondary" (click)="closeDialog(purchaseDialog)">Close</button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="purchaseDialogOkButtonClicked(); closeDialog(purchaseDialog)" [disabled]="familyNFTPurchaseQuantity < 1 || familyNFTPurchaseQuantity > maxFamilyNFT">Withdraw</button>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+    </div>
+
+</dialog>
 
 
 <dialog #withdrawalDialog class="withdrawalDialog">

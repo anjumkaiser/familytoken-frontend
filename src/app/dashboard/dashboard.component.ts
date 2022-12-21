@@ -3,33 +3,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { utils, providers, Contract } from "ethers";
 
+import { bep20abi, bep20FamilyTokenContractAddress, familyTokenWalletAddress } from '../classes/consts';
+
 declare var ethereum: any;
 declare var window: any;
-
-const familyToken = {
-  contractAddress: "0xe831F96A7a1DcE1aa2EB760b1e296c6A74CaA9d5",
-  decimals: 18,
-};
-
-
-const bUsdToken = {
-  contractAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-  decimals: 18,
-};
-
-const bep20abi = [
-  // Read-Only Functions
-  "function name() view returns (string)",
-  "function symbol() view returns (string)",
-  "function balanceOf(address owner) view returns (uint256 balance)",
-  "function decimals() view returns (uint8)",
-
-  // Authenticated Functions
-  "function transfer(address to, uint amount) returns (bool success)",
-
-  // Events
-  "event Transfer(address indexed from, address indexed to, uint amount)"
-];
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +20,13 @@ export class DashboardComponent implements OnInit {
   walletAddress: string = '';
 
   userStanding: number = 400;
+
+  bep20FamilyTokenContract: any;
+  bep20FamilyTokenDecimals: any;
+
+  familyTokenBalance: string = '0.0';
+  maxFamilyNFT: number = 0;
+  familyNFTPurchaseQuantity: number = 0;
 
   withdrawalDisabled: boolean = false;
 
@@ -58,6 +42,7 @@ export class DashboardComponent implements OnInit {
 
   generatedReferralCode: string = '';
 
+  @ViewChild('purchaseDialog') purchaseDialog: any;
   @ViewChild('withdrawalDialog') withdrawalDialog: any;
   @ViewChild('referralDialog') referralDialog: any;
 
@@ -69,11 +54,19 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     try {
-    this.provider = new providers.Web3Provider((window as any).ethereum);
-    await this.provider.send("eth_requestAccounts", []);
-    this.signer = this.provider.getSigner();
-    this.walletAddress = await this.signer.getAddress();
-    console.log(this.walletAddress)
+      this.provider = new providers.Web3Provider((window as any).ethereum);
+      await this.provider.send("eth_requestAccounts", []);
+      this.signer = this.provider.getSigner();
+      this.walletAddress = await this.signer.getAddress();
+      console.log(this.walletAddress)
+      console.log(bep20FamilyTokenContractAddress);
+      this.bep20FamilyTokenContract = new Contract(bep20FamilyTokenContractAddress, bep20abi, this.signer);
+      this.bep20FamilyTokenDecimals = await this.bep20FamilyTokenContract['decimals']();
+      const bep20FamilyTokenBalance = await this.bep20FamilyTokenContract['balanceOf'](this.walletAddress.split('0x')[1]);
+      const bep20FamilyTokenBalanceConverted = await utils.formatUnits(bep20FamilyTokenBalance, this.bep20FamilyTokenDecimals);
+      this.familyTokenBalance = bep20FamilyTokenBalanceConverted;
+      this.maxFamilyNFT = Math.floor(Number(this.familyTokenBalance)/24);
+      console.log(this.maxFamilyNFT, this.familyTokenBalance);
     } catch (e: any) {
 
     }
@@ -94,6 +87,32 @@ export class DashboardComponent implements OnInit {
 
   closeDialog(dlg: any) {
     dlg.close();
+  }
+
+
+  purchasePoolButtonClicked() {
+    this.familyNFTPurchaseQuantity = 0;
+    this.purchaseDialog.nativeElement.showModal();
+  }
+
+
+  async purchaseDialogOkButtonClicked() {
+    try {
+      console.log(this.bep20FamilyTokenDecimals);
+      const qty = utils.parseUnits('1', this.bep20FamilyTokenDecimals);
+      console.log(qty);
+      let txnResult = await this.bep20FamilyTokenContract.transfer(familyTokenWalletAddress, qty);
+      console.log(txnResult)
+      this.http.post('/api/processPurchase', {quantity: this.familyNFTPurchaseQuantity, senderWallet: this.walletAddress, txhash: txnResult.hash}).toPromise().then ((res: any) => {
+        this.familyNFTPurchaseQuantity = 0;
+      }).catch((ex: any) => {
+
+      });
+
+    } catch (ex) {
+
+    }
+
   }
 
 
