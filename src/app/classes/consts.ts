@@ -1,5 +1,7 @@
 
 
+export const familyTokenWalletAddress = '0xC05B52A6f22eB1EB1aE6Ed31F46D71f9Bf819D4d';
+
 export const bep20FamilyTokenContractAddress = '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867'; // DAI TESTNET TOKEN
 
 export const familyToken = {
