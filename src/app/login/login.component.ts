@@ -14,10 +14,8 @@ export class LoginComponent {
 
   authError: boolean = false;
 
-  loginForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
-    userPassword: new FormControl('', Validators.required),
-  });
+  userEmail: string = '';
+  userPassword: string = '';
 
 
   constructor (
@@ -29,7 +27,10 @@ export class LoginComponent {
   submitLoginForm() {
 
     const apiUrl = '/api/auth/login';
-    const apiData = this.loginForm.value;
+    const apiData = {
+      userEmail: this.userEmail,
+      userPassword: this.userPassword,
+    };
     this.http.post(apiUrl, apiData).toPromise().then((res: any) => {
       if (!res.success) {
         this.authError = true;

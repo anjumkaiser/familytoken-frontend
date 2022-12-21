@@ -24,6 +24,8 @@ import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: 'about', redirectTo: 'landing', pathMatch: 'full' },
+  { path: 'blog', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent, },
   { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignUpComponent, },
