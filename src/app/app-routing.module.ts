@@ -30,10 +30,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, },
   { path: 'signup', component: SignUpComponent, },
   { path: 'datacollection', component: DataCollectionComponent, },
-  //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard] },
-  //{ path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard] },
-  { path: 'dashboard', component: DashboardComponent, },
-  { path: 'buy', component: BuyComponent, },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard]},
+  { path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard]},
 ];
 
 @NgModule({
