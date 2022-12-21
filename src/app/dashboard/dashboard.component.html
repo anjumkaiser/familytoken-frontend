@@ -222,3 +222,31 @@
 </dialog>
 
 
+<dialog #successDialog>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <h1>{{SuccessTitle}}</h1>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">{{SuccessMessage}}</div>
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><button class="btn btn-primary" (click)="successDialogOkClicked(successDialog)">Ok</button></div>
+  <div class="row">&nbsp;</div>
+</dialog>
+
+
+
+<dialog #errorDialog>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <h1>{{FailureTitle}}</h1>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">{{FailureMessage}}</div>
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="row text-center"><button class="btn btn-danger" (click)="errorDialogOkClicked(errorDialog)">Ok</button></div>
+  <div class="row">&nbsp;</div>
+</dialog>

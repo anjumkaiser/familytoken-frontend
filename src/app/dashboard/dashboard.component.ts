@@ -46,7 +46,15 @@ export class DashboardComponent implements OnInit {
   @ViewChild('purchaseDialog') purchaseDialog: any;
   @ViewChild('withdrawalDialog') withdrawalDialog: any;
   @ViewChild('referralDialog') referralDialog: any;
+  @ViewChild('successDialog') successDialog: any;
+  @ViewChild('errorDialog') errorDialog: any;
 
+
+  SuccessTitle: string = '';
+  SuccessMessage: string = '';
+
+  FailureTitle: string = '';
+  FailureMessage: string = '';
 
   constructor (
     private http: HttpClient,
@@ -117,7 +125,22 @@ export class DashboardComponent implements OnInit {
         {'headers': headers}
       ).toPromise().then ((res: any) => {
         this.familyNFTPurchaseQuantity = 0;
+        if (res.success) {
+          this.SuccessTitle = 'Purchase successful';
+          this.SuccessMessage = 'You have successsfully purchased FamilyNFT. Your daily profit will start on 9th day.';
+          this.successDialog.nativeElement.showModal();
+          return;
+        }
+
+        this.FailureTitle = 'Purchase failed';
+        this.FailureMessage = 'Unable to process your family NFT purchase.';
+        this.errorDialog.nativeElement.showModal();
+
       }).catch((ex: any) => {
+
+        this.FailureTitle = 'Purchase failed';
+        this.FailureMessage = 'Unable to process your family NFT purchase.';
+        this.errorDialog.nativeElement.showModal();
 
       });
 
@@ -194,6 +217,17 @@ export class DashboardComponent implements OnInit {
       });
 
     }
+  }
+
+
+
+  successDialogOkClicked(dlg: any) {
+    dlg.close();
+    location.reload();
+  }
+
+  errorDialogOkClicked(dlg: any) {
+    dlg.close();
   }
 
 }
