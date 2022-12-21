@@ -110,7 +110,7 @@ export class DataCollectionComponent implements AfterViewInit {
   submitSignUpForm() {
     console.log('submitSignUpForm');
 
-    const apiUrl = '/api/auth/datacollection';
+    const apiUrl = '/api/datacollection';
     let apiData = { 
       userEmail: this.userEmail.trim(),
       //userName: this.userName.trim(),
