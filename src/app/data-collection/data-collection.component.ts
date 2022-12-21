@@ -7,11 +7,11 @@ import { COUNTRIES } from '../models/countries';
 import { ConfirmedValidator } from '../validators/confirmed.validator';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  selector: 'app-data-collection',
+  templateUrl: './data-collection.component.html',
+  styleUrls: ['./data-collection.component.scss']
 })
-export class SignupComponent implements AfterViewInit {
+export class DataCollectionComponent implements AfterViewInit {
 
   @ViewChild('successDialog') successDialog: any;
   @ViewChild('errorDialog') errorDialog: any;
