@@ -94,12 +94,19 @@
 
         <div class="row">
             <div class="col-5 offset-1">Family Token Balance</div>
-            <div class="col-6">{{familyTokenBalance}}</div>
+            <div class="col-6">FT {{familyTokenBalance}}</div>
         </div>
+
+        <div class="row">
+            <div class="col-5 offset-1">Family NFT Price</div>
+            <div class="col-6">FT {{this.familyNftPurchasePrice}}</div>
+        </div>
+
+        <div class="row">&nbsp;</div>
 
 
         <div class="row">
-            <div class="col-5 offset-1">Family NFT</div>
+            <div class="col-5 offset-1">Family NFT Quantity</div>
             <div class="col-6"><input class="form-control" type="number" min=0 [max]="maxFamilyNFT" [(ngModel)]="familyNFTPurchaseQuantity"></div>
         </div>
 
@@ -109,7 +116,7 @@
             <div class="col-12 text-center">
                 <button class="btn btn-secondary" (click)="closeDialog(purchaseDialog)">Close</button>
                 &nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" (click)="purchaseDialogOkButtonClicked(); closeDialog(purchaseDialog)" [disabled]="familyNFTPurchaseQuantity < 1 || familyNFTPurchaseQuantity > maxFamilyNFT">Withdraw</button>
+                <button class="btn btn-primary" (click)="purchaseDialogOkButtonClicked(); closeDialog(purchaseDialog)" [disabled]="familyNFTPurchaseQuantity < 1 || familyNFTPurchaseQuantity > maxFamilyNFT">Purchase</button>
             </div>
         </div>
 
