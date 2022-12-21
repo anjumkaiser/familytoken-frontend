@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { loadScript } from '@paypal/paypal-js';
 
 declare var paypal: any;
+declare var window: any;
 
 @Component({
   selector: 'app-paypal-buttons',
@@ -70,10 +71,14 @@ export class PaypalButtonsComponent implements OnInit {
             const order = await actions.order.capture();
             console.log(order);
 
+            const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+            const headers = new HttpHeaders()
+              .set('Authorization', `Bearer ${accesstoken}`);
+
             const apiData = {order: order, walletAddress: instance.walletAddress,  tokenQuantity: instance.tokenQuantity, billedAmount: instance.billedAmount, billedCurrency: instance.billedCurrency};
             const apiUrl: string = '/api/processPaypalTokenPurchase';
             console.log(apiUrl, apiData);
-            instance.http.post(apiUrl, apiData).toPromise()
+            instance.http.post(apiUrl, apiData, {'headers': headers}).toPromise()
               .then( (d: any) => {
                 instance.approved?.(d, instance.router);
               })

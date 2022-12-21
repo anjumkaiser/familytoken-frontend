@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { utils, providers, Contract } from "ethers";
 
@@ -71,7 +71,11 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    this.http.get('/api/getUserStanding').toPromise().then( (res: any) => {
+    const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${accesstoken}`);
+
+    this.http.get('/api/getUserStanding', {'headers': headers}).toPromise().then( (res: any) => {
       console.log(res);
       this.withdrawalDialogMaximumWithdrawalAmount = res.pool1;
       this.referralDialogMaximumReferralAmount = res.pool2;
@@ -102,8 +106,15 @@ export class DashboardComponent implements OnInit {
       const qty = utils.parseUnits('1', this.bep20FamilyTokenDecimals);
       console.log(qty);
       let txnResult = await this.bep20FamilyTokenContract.transfer(familyTokenWalletAddress, qty);
-      console.log(txnResult)
-      this.http.post('/api/processPurchase', {quantity: this.familyNFTPurchaseQuantity, senderWallet: this.walletAddress, txhash: txnResult.hash}).toPromise().then ((res: any) => {
+      console.log(txnResult);
+
+      const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+      const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ${accesstoken}`);
+      this.http.post('/api/processPurchase', 
+        {quantity: this.familyNFTPurchaseQuantity, senderWallet: this.walletAddress, txhash: txnResult.hash},
+        {'headers': headers}
+      ).toPromise().then ((res: any) => {
         this.familyNFTPurchaseQuantity = 0;
       }).catch((ex: any) => {
 
@@ -117,7 +128,10 @@ export class DashboardComponent implements OnInit {
 
 
   withdrawalDialogOkButtonClicked() {
-    this.http.post('/api/processWithdrawal', {Amount: this.withdrawalDialogWithdrawalAmount}).toPromise().then ((res: any) => {
+    const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${accesstoken}`);
+    this.http.post('/api/processWithdrawal', {Amount: this.withdrawalDialogWithdrawalAmount}, {'headers': headers}).toPromise().then ((res: any) => {
       this.withdrawalDialogMaximumWithdrawalAmount -= this.withdrawalDialogWithdrawalAmount;
     }).catch((ex: any) => {
 
@@ -139,7 +153,11 @@ export class DashboardComponent implements OnInit {
 
   autostakingPoolButtonClicked() {
 
-    this.http.post('/api/processAutoStaking', { Amount : this.autoStakingDialogBalance}).toPromise().then((res: any) => {
+    const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${accesstoken}`);
+
+    this.http.post('/api/processAutoStaking', { Amount : this.autoStakingDialogBalance}, {'headers': headers}).toPromise().then((res: any) => {
 
         if (res.success) {
           this.autoStakingDialogBalance -= this.autoStakingDialogBalance;
@@ -159,8 +177,11 @@ export class DashboardComponent implements OnInit {
 
   generateReferralCodeButtonClicked() {
     if ( this.referralDialogMaximumReferralAmount > 24) {
+      const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+      const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${accesstoken}`);
 
-      this.http.get('/api/generateReferralCode').toPromise().then((res: any) => {
+      this.http.get('/api/generateReferralCode', {'headers': headers}).toPromise().then((res: any) => {
 
         if (res.success) {
           this.referralDialogMaximumReferralAmount -= 24;
