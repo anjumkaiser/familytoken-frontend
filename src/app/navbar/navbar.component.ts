@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
+declare var window: any;
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  constructor (
+    private router: Router,
+  ) {}
+
+  doLogout() {
+    window.sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 }
