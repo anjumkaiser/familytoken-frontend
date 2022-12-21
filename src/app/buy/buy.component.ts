@@ -5,25 +5,9 @@ import { timer, of, fromEvent } from 'rxjs';
 
 import { ethers, providers, Contract } from "ethers";
 
+import { bep20abi, bep20FamilyTokenContractAddress } from '../classes/consts';
+
 declare var ethereum: any;
-
-
-const bep20abi = [
-  // Read-Only Functions
-  "function name() view returns (string)",
-  "function symbol() view returns (string)",
-  "function balanceOf(address owner) view returns (uint256 balance)",
-  "function decimals() view returns (uint8)",
-
-  // Authenticated Functions
-  "function transfer(address to, uint amount) returns (bool success)",
-
-  // Events
-  "event Transfer(address indexed from, address indexed to, uint amount)"
-];
-
-const bep20FamilyTokenContractAddress = '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867';
-
 
 @Component({
   selector: 'app-buy',
