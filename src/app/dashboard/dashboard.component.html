@@ -16,21 +16,9 @@
         <div class="col-2 offset-2">
             <div>Pool 1</div>
             <div>&nbsp;</div>
-            <!--
-            <div>
-                <button class="btn btn-outline-secondary blockbox" (click)="withdrawalPoolButtonClicked()" [disabled]="withdrawalDisabled">
-                    <div>Withdraw</div>
-                    <div *ngIf="withdrawalDisabled">(Disabled)</div>
-                    <div>&nbsp;</div>
-                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
-                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
-                </button>
-            </div>
-            -->
             <div>
                 <button class="btn btn-outline-secondary blockbox" (click)="purchasePoolButtonClicked()">
                     <div>Purchase Family NFT</div>
-                    <div *ngIf="withdrawalDisabled">(Disabled)</div>
                     <div>&nbsp;</div>
                     <div>Balance {{familyTokenBalance}} FT</div>
                     <!--div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div-->
