@@ -20,6 +20,7 @@ import { BuyComponent } from './buy/buy.component';
 import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.component';
 import { ProfitListComponent } from './profit-list/profit-list.component';
 import { ReferralCodesComponent } from './referral-codes/referral-codes.component';
+import { RentedFamilyNFTComponent } from './rented-family-nft/rented-family-nft.component';
 
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard]},
   { path: 'profit-list', component: ProfitListComponent, canActivate: [AuthenticatedGuard]},
   { path: 'referral-codes', component: ReferralCodesComponent, canActivate: [AuthenticatedGuard]},
+  { path: 'family-nfts', component: RentedFamilyNFTComponent, canActivate: [AuthenticatedGuard]},
 ];
 
 @NgModule({
@@ -58,6 +60,7 @@ const routes: Routes = [
     LandingComponent,
     ProfitListComponent,
     ReferralCodesComponent,
+    RentedFamilyNFTComponent,
   ]
 })
 export class AppRoutingModule { }

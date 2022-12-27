@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   signer: any;
   walletAddress: string = '';
 
-  userStanding: number = 400;
+  pool1Balance: number = 0;
 
   bep20FamilyTokenContract: any;
   bep20FamilyTokenDecimals: any;
@@ -92,10 +92,11 @@ export class DashboardComponent implements OnInit {
 
     this.http.get('/api/getUserStanding', {'headers': headers}).toPromise().then( (res: any) => {
       console.log(res);
-      this.withdrawalDialogMaximumWithdrawalAmount = res.pool1;
+      this.pool1Balance = res.pool1;
       this.referralDialogMaximumReferralAmount = res.pool2;
       this.autoStakingDialogBalance = res.autostaking;
       this.nftMinersAmount = res.nftMiners;
+      this.withdrawalDialogMaximumWithdrawalAmount = res.withdrawalBalance;
     }).catch((e: any) => {
       console.log(e);
     });
