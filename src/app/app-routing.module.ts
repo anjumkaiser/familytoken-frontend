@@ -19,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyComponent } from './buy/buy.component';
 import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.component';
 import { ProfitListComponent } from './profit-list/profit-list.component';
+import { ReferralCodesComponent } from './referral-codes/referral-codes.component';
 
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard]},
   { path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard]},
   { path: 'profit-list', component: ProfitListComponent, canActivate: [AuthenticatedGuard]},
+  { path: 'referral-codes', component: ReferralCodesComponent, canActivate: [AuthenticatedGuard]},
 ];
 
 @NgModule({
@@ -55,6 +57,7 @@ const routes: Routes = [
     PaypalButtonsComponent,
     LandingComponent,
     ProfitListComponent,
+    ReferralCodesComponent,
   ]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,20 @@
+<div class="container">
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Created Date</th>
+                <th scope="col">Referral code</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td scope="col">{{row.date | date}}</td>
+                <th scope="col">{{row.referral_code}}</th>
+                <th scope="col">{{row.status}}</th>
+            </tr>
+        </tbody>
+    </table> 
+
+</div>
