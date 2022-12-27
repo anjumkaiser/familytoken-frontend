@@ -93,6 +93,12 @@ export class DashboardComponent implements OnInit {
       console.log(e);
     });
 
+    const todayDate = new Date();
+    const todayDayOfMonth = todayDate.getDate();
+
+    this.withdrawalDisabled = (todayDayOfMonth === 1 || todayDayOfMonth === 15 ) ? false : true;
+
+
     //this.withdrawalDialogMaximumWithdrawalAmount = this.userStanding / 4;
     // /this.referralDialogMaximumReferralAmount = this.userStanding / 4;
   }
@@ -120,29 +126,35 @@ export class DashboardComponent implements OnInit {
       const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
       const headers = new HttpHeaders()
         .set('Authorization', `Bearer ${accesstoken}`);
-      this.http.post('/api/processPurchase', 
-        {quantity: this.familyNFTPurchaseQuantity, senderWallet: this.walletAddress, txhash: txnResult.hash},
-        {'headers': headers}
-      ).toPromise().then ((res: any) => {
-        this.familyNFTPurchaseQuantity = 0;
-        if (res.success) {
-          this.SuccessTitle = 'Purchase successful';
-          this.SuccessMessage = 'You have successsfully purchased FamilyNFT. Your daily profit will start on 9th day.';
-          this.successDialog.nativeElement.showModal();
-          return;
-        }
 
+        try {
+
+          const res: any = await this.http.post('/api/processPurchase', 
+            {quantity: this.familyNFTPurchaseQuantity, senderWallet: this.walletAddress, txhash: txnResult.hash},
+            {'headers': headers}
+          ).toPromise();
+          this.familyNFTPurchaseQuantity = 0;
+          if (res.success) {
+            this.SuccessTitle = 'Purchase successful';
+            this.SuccessMessage = 'You have successsfully purchased FamilyNFT. Your daily profit will start on 9th day.';
+            this.successDialog.nativeElement.showModal();
+            const bep20FamilyTokenBalance = await this.bep20FamilyTokenContract['balanceOf'](this.walletAddress.split('0x')[1]);
+            const bep20FamilyTokenBalanceConverted = await utils.formatUnits(bep20FamilyTokenBalance, this.bep20FamilyTokenDecimals);
+            this.familyTokenBalance = bep20FamilyTokenBalanceConverted;
+            this.maxFamilyNFT = Math.floor(Number(this.familyTokenBalance)/this.familyNftPurchasePrice);
+            return;
+
+          } else {
+            this.FailureTitle = 'Purchase failed';
+            this.FailureMessage = 'Unable to process your family NFT purchase.';
+            this.errorDialog.nativeElement.showModal();
+
+          }
+      } catch (ex: any) {
         this.FailureTitle = 'Purchase failed';
         this.FailureMessage = 'Unable to process your family NFT purchase.';
         this.errorDialog.nativeElement.showModal();
-
-      }).catch((ex: any) => {
-
-        this.FailureTitle = 'Purchase failed';
-        this.FailureMessage = 'Unable to process your family NFT purchase.';
-        this.errorDialog.nativeElement.showModal();
-
-      });
+      }
 
     } catch (ex) {
 
@@ -155,10 +167,9 @@ export class DashboardComponent implements OnInit {
     const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${accesstoken}`);
-    this.http.post('/api/processWithdrawal', {Amount: this.withdrawalDialogWithdrawalAmount}, {'headers': headers}).toPromise().then ((res: any) => {
-      this.withdrawalDialogMaximumWithdrawalAmount -= this.withdrawalDialogWithdrawalAmount;
+    this.http.post('/api/processWithdrawal', {Amount: this.withdrawalDialogMaximumWithdrawalAmount, WalletAddress: this.walletAddress }, {'headers': headers}).toPromise().then ((res: any) => {
+      this.withdrawalDialogMaximumWithdrawalAmount -= this.withdrawalDialogMaximumWithdrawalAmount;
     }).catch((ex: any) => {
-
     });
   }
 
@@ -194,7 +205,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  familyNftPoolButtonClicked() {
+  familyNftMinerPoolButtonClicked() {
 
   }
 

@@ -29,7 +29,7 @@
             -->
             <div>
                 <button class="btn btn-outline-secondary blockbox" (click)="purchasePoolButtonClicked()">
-                    <div>Purchased</div>
+                    <div>Purchase Family NFT</div>
                     <div *ngIf="withdrawalDisabled">(Disabled)</div>
                     <div>&nbsp;</div>
                     <div>Balance {{familyTokenBalance}} FT</div>
@@ -68,8 +68,8 @@
             <div>Pool 4</div>
             <div>&nbsp;</div>
             <div>
-                <button class="btn btn-outline-secondary blockbox" (click)="familyNftPoolButtonClicked()">
-                    <div>Family NFT</div>
+                <button class="btn btn-outline-secondary blockbox" (click)="familyNftMinerPoolButtonClicked()">
+                    <div>Family NFT Miner</div>
                     <div>&nbsp;</div>
                     <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
                     <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
@@ -77,6 +77,24 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row text-center">
+        <div class="col-2 offset-5">
+            <!--div>FamilyToken Wallet</div-->
+            <div>&nbsp;</div>
+            <div>
+                <button class="btn btn-outline-secondary blockbox" (click)="withdrawalPoolButtonClicked()" [disabled]="withdrawalDisabled">
+                    <div>FamilyToken Wallet</div>
+                    <div *ngIf="withdrawalDisabled">(Disabled)</div>
+                    <div>&nbsp;</div>
+                    <div>Balance {{withdrawalDialogMaximumWithdrawalAmount}} FT</div>
+                    <div>Balance US$ {{withdrawalDialogMaximumWithdrawalAmount}}</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -146,14 +164,14 @@
 
         <div class="row">&nbsp;</div>
 
-        <div class="row">
+        <!--div class="row">
             <div class="col-5 offset-1">
                 <label>Withdrawal Amount</label>
             </div>
             <div class="col-5">
                 <input class="form-control" type="number" [(ngModel)]="withdrawalDialogWithdrawalAmount" min=0 [max]="withdrawalDialogMaximumWithdrawalAmount">
             </div>
-        </div>
+        </div-->
 
         <div class="row">&nbsp;</div>
 
@@ -161,7 +179,7 @@
             <div class="col-12 text-center">
                 <button class="btn btn-secondary" (click)="closeDialog(withdrawalDialog)">Close</button>
                 &nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" (click)="withdrawalDialogOkButtonClicked(); closeDialog(withdrawalDialog)" [disabled]=" withdrawalDialogWithdrawalAmount <=0 || withdrawalDialogWithdrawalAmount > withdrawalDialogMaximumWithdrawalAmount">Withdraw</button>
+                <button class="btn btn-primary" (click)="withdrawalDialogOkButtonClicked(); closeDialog(withdrawalDialog)" [disabled]=" withdrawalDialogMaximumWithdrawalAmount <=0">Withdraw</button>
             </div>
         </div>
 
