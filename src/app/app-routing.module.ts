@@ -17,7 +17,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyComponent } from './buy/buy.component';
-import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.component';``
+import { PaypalButtonsComponent } from './paypal-buttons/paypal-buttons.component';
+import { ProfitListComponent } from './profit-list/profit-list.component';
 
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'datacollection', component: DataCollectionComponent, },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticatedGuard]},
   { path: 'buy', component: BuyComponent, canActivate: [AuthenticatedGuard]},
+  { path: 'profit-list', component: ProfitListComponent, canActivate: [AuthenticatedGuard]},
 ];
 
 @NgModule({
@@ -52,6 +54,7 @@ const routes: Routes = [
     BuyComponent,
     PaypalButtonsComponent,
     LandingComponent,
+    ProfitListComponent,
   ]
 })
 export class AppRoutingModule { }

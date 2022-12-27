@@ -1,0 +1,22 @@
+<div class="container">
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Profit Type</th>
+                <th scope="col">Amount Earned</th>
+                <th scope="col">Againt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td scope="col">{{row.date | date}}</td>
+                <th scope="col">{{row.profitType}}</th>
+                <th scope="col">{{row.amount}}</th>
+                <th scope="col">{{row.profitAgainst}}</th>
+            </tr>
+        </tbody>
+    </table> 
+
+</div>
