@@ -1,11 +1,18 @@
 
 
+/* TEST NET ADDRESSES
 export const familyTokenWalletAddress = '0xC05B52A6f22eB1EB1aE6Ed31F46D71f9Bf819D4d';
-
 export const bep20FamilyTokenContractAddress = '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867'; // DAI TESTNET TOKEN
+*/
+
+
+/* LIVE ADDRESSES */
+export const familyTokenWalletAddress = '0x375380B018f014ddEE547f6ADBeB165ea359583d';
+export const bep20FamilyTokenContractAddress = '0x2e135DFED3557376Df983703E610Ecf46cC2B7e8';
+
 
 export const familyToken = {
-  contractAddress: "0xe831F96A7a1DcE1aa2EB760b1e296c6A74CaA9d5",
+  contractAddress: "0x2e135DFED3557376Df983703E610Ecf46cC2B7e8",
   decimals: 18,
 };
 
