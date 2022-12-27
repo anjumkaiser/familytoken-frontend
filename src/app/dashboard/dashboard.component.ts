@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
 
   autoStakingDialogBalance: number = 0;
 
+  nftMinersAmount: number = 0;
 
 
   generatedReferralCode: string = '';
@@ -89,6 +90,7 @@ export class DashboardComponent implements OnInit {
       this.withdrawalDialogMaximumWithdrawalAmount = res.pool1;
       this.referralDialogMaximumReferralAmount = res.pool2;
       this.autoStakingDialogBalance = res.autostaking;
+      this.nftMinersAmount = res.nftMiners;
     }).catch((e: any) => {
       console.log(e);
     });
