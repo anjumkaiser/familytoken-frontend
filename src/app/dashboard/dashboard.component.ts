@@ -42,8 +42,13 @@ export class DashboardComponent implements OnInit {
   nftMinersAmount: number = 0;
 
 
+  moveBalanceDialogFromPool: number = 0;
+  moveBalanceDialogToPool: number = 0;
+  moveBalanceDialogMoveValue: number = 0;
+
   generatedReferralCode: string = '';
 
+  @ViewChild('moveBalanceDialog') moveBalanceDialog: any;
   @ViewChild('purchaseDialog') purchaseDialog: any;
   @ViewChild('withdrawalDialog') withdrawalDialog: any;
   @ViewChild('referralDialog') referralDialog: any;
@@ -162,6 +167,32 @@ export class DashboardComponent implements OnInit {
 
     }
 
+  }
+
+  maxPossibleMoveBalance: number = 0;
+
+  moveBalanceButtonClicked() {
+    this.moveBalanceDialogFromPool = 1;
+    this.moveBalanceDialogToPool = 0;
+    this.moveBalanceDialogMoveValue = 0;
+    this.maxPossibleMoveBalance = this.withdrawalDialogMaximumWithdrawalAmount;
+    this.moveBalanceDialog.nativeElement.showModal();
+  }
+
+
+  moveBalanceDialogOkButtonClicked() {
+    console.log(this.moveBalanceDialogFromPool, this.moveBalanceDialogToPool);
+    const accesstoken = window.sessionStorage.getItem('ACCESS_TOKEN');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${accesstoken}`);
+
+    const url = '/api/moveBalanceBetweenPools';
+    this.http.post(url, { fromPool: this.moveBalanceDialogFromPool, toPool: this.moveBalanceDialogToPool, moveValue: this.moveBalanceDialogMoveValue }, {'headers': headers}).toPromise()
+    .then ((res: any) => {
+      window.location.reload();
+
+    }).catch((ex: any) => {
+    });
   }
 
 

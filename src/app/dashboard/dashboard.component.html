@@ -83,6 +83,15 @@
         </div>
     </div>
 
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row text-center">
+        <div class="col-2 offset-5">
+            <button class="btn btn-outline-secondary" (click)="moveBalanceButtonClicked()">Move Balance</button>
+        </div>
+    </div>
+
 </div>
 
 
@@ -218,6 +227,75 @@
         <div class="row">
             <div class="col-12 text-center">
                 <button class="btn btn-secondary" (click)="closeDialog(referralDialog)">Close</button>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+    </div>
+
+</dialog>
+
+
+<dialog #moveBalanceDialog class="moveBalanceDialog">
+
+    <div class="container">
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row text-center">
+            <h2>Move Balance</h2>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">From</div>
+            <div class="col-6">
+                Pool 1
+                <!--
+                <select class="form-select" [(ngModel)]="moveBalanceDialogFromPool">
+                    <option value=0 disabled>Select</option>
+                    <option value=1>Pool 1</option>
+                    <option value=2>Pool 2</option>
+                    <option value=3>Pool 3</option>
+                    <option value=4>Pool 4</option>
+                </select>
+                -->
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">To</div>
+            <div class="col-6">
+                <select class="form-select" [(ngModel)]="moveBalanceDialogToPool">
+                    <option value=0 disabled>Select</option>
+                    <!--option value=1>Pool 1</option-->
+                    <option value=2>Pool 2</option>
+                    <option value=3>Pool 3</option>
+                    <option value=4>Pool 4</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-5 offset-1">Value</div>
+            <div class="col-6">
+                <input class="form-control" type="number" [(ngModel)]="moveBalanceDialogMoveValue" min=0 [max]="maxPossibleMoveBalance">
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn btn-secondary" (click)="closeDialog(moveBalanceDialog)">Close</button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="moveBalanceDialogOkButtonClicked(); closeDialog(moveBalanceDialog)" [disabled]="(moveBalanceDialogFromPool === 0 || moveBalanceDialogToPool === 0) || (moveBalanceDialogFromPool === moveBalanceDialogToPool)">Move</button>
             </div>
         </div>
 
