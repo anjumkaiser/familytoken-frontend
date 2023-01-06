@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit {
     this.moveBalanceDialogFromPool = 1;
     this.moveBalanceDialogToPool = 0;
     this.moveBalanceDialogMoveValue = 0;
-    this.maxPossibleMoveBalance = this.withdrawalDialogMaximumWithdrawalAmount;
+    this.maxPossibleMoveBalance = this.pool1Balance;
     this.moveBalanceDialog.nativeElement.showModal();
   }
 
